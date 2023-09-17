@@ -1,16 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="s.css">
-</head>
-<body>
-    <div class="editor" id="editor"></div>
-    <div class="rightclick" id="rightclick">
-        <button id="div">Div</button>
-    </div>
-    <script src="events.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="s.css" />
+    </head>
+    <body>
+        <div class="editor" id="editor">
+            <div id="selectedbody" class="selectedbody"></div>
+        </div>
+        <div class="addmenu" id="addmenu">
+            <button onclick="call_add('div')">Div</button>
+            <button onclick="call_add('input')">input</button>
+            <button onclick="call_add('h1')">H1 to H6</button>
+            <button onclick="call_add('textarea')">TextArea</button>
+            <button onclick="call_add('button')">Button</button>
+            <button onclick="call_add('area')">Area</button>
+            <button onclick="call_add('canvas')">Canvas</button>
+            <button onclick="call_add('img')">Img</button>
+            <button onclick="call_add('a')">link</button>
+            <button onclick="call_add('select')">selector</button>
+            <button onclick="call_add('option')">options</button>
+            <button onclick="call_add('source')">source</button>
+            <button onclick="call_add('span')">span</button>
+            <button onclick="call_add('svg')">svg</button>
+            <button onclick="call_add('video')">video</button>
+            <button onclick="call_add('object')">object</button>
+            <button onclick="call_add('nav')">nav</button>
+            <button onclick="call_add('canvas')">canvas</button>
+
+        </div>
+        <div class="rightclick" id="rightclick">
+            <button id="add" onclick="add_menu_open()">Add</button>
+        </div>
+        <div class="menu" id="menu"></div>
+        <div class="properties" id="props">
+            <h1>ID Name</h1>
+            <input type="text" id="ID_inducator" onchange="change('id')" placeholder="Not-Set"/>
+            <h1>position</h1>
+            <input type="text" id="position" placeholder="default-absolute">
+            <h1>Background-color</h1>
+            <input type="color" id="background_color" oninput="change('background_color')" />
+            <h1>scale</h1>
+            <div class="scale">
+                <input type="text" placeholder="width" id="width" onchange="change('width')"/>
+                <input type="text" placeholder="height" id="height" onchange="change('height')"/>
+            </div>
+            <div class="dimension">
+                <input type="text" placeholder="top" id="top" onchange="change('top')"/>
+                <input type="text" placeholder="left" id="left" onchange="change('left')"/>
+            </div>
+            <div class="margin_padding">
+                <h1>margin</h1>
+                <div class="margin_holder">
+                    <input type="text" placeholder="margin" id="margin_all" onchange="change('margin_all')"/>
+                    <button>custom</button>
+                </div>
+                <h1>padding</h1>
+                <div class="padding_holder">
+                    <input type="text" placeholder="padding" id="padding_all" onchange="change('padding_all')">
+                    <button>custom</button>
+                </div>
+            </div>
+            <div class="text_only">
+                <h1>Text properties</h1>
+                <input type="text" placeholder="content" id="content" oninput="change('content')">
+                <input type="text" placeholder="font size" id="font_size" onchange="change('font_size')">
+                <div class="color_selector">
+                    <input type="text" placeholder="color" id="text_color_text" onchange="change('font_color_text')">
+                    <input type="color" id="text_color" oninput="change('text_color')">
+                </div>
+                <input type="text" placeholder="font-family" id="font_family" onchange="change('font_family')">
+                <input type="text" placeholder="text-decoration" id="text_decoration" onchange="change('text_decor')">
+                <input type="text" placeholder="font-weight" id="font_weight" onchange="change('font_weight')">
+                <input type="text" placeholder="text-align" id="text_align" onchange="change('text_align')">
+            </div>
+            <div class="others">
+                <h1>others</h1>
+                <input type="text" placeholder="border" id="border">
+                <input type="text" placeholder="box-shadow" id="box_shadow">
+                <input type="text" placeholder="z-index" id="Z_index">
+                <input type="text" placeholder="display" id="display">
+                <input type="text" placeholder="img-url" id="img_url">
+                <input type="text" placeholder="image-repeat" id="image_repeat">
+                <input type="text" placeholder="overflow-x" id="overflow_x">
+                <input type="text" placeholder="overflow-y" id="overflow_y">
+
+            </div>
+            <div class="scroll_max"></div>
+        </div>
+        <script src="events.js"></script>
+    </body>
 </html>
