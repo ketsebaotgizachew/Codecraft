@@ -46,6 +46,8 @@ let content = document.getElementById("content")
 
 let key;
 
+//for side grab selectors
+let bottom_right_grab = document.getElementById("bottom_right")
 
 function debugger_print(text) {
   if (debug_mode == true) {
@@ -57,7 +59,8 @@ function debugger_print(text) {
 }
 
 //preventing defult rightclick
-document.addEventListener("contextmenu", function (e) {
+//updates preventing right click only on eitor
+editor.addEventListener("contextmenu", function (e) {
   e.preventDefault();
   //move rightclick menu to position before displaying
   rightclickmenu.style.top = e.clientY + "px";
@@ -159,13 +162,26 @@ function add_menu_open(){
 
 editor.addEventListener("click", function (e) {
   if (e.target && e.target !== editor) {
-    selected_object.style.border = "none";
+    selector.style.top = selected_object.getBoundingClientRect().y - 10 +"px"
+    selector.style.left = selected_object.getBoundingClientRect().x - 10 +"px"
+    selector.style.width = selected_object.getBoundingClientRect().width +10+"px"
+    selector.style.height = selected_object.getBoundingClientRect().height +10+"px"
+    selector.style.display = "block"
+
+    //bottom right grabber feature not complete
+    //bottom_right_grab.style.display = "block"
+    //bottom_right_grab.style.top = selected_object.getBoundingClientRect().y + selected_object.getBoundingClientRect().height - 10 +"px"
+    //bottom_right_grab.style.left = selected_object.getBoundingClientRect().x + selected_object.getBoundingClientRect().width - 10 +"px"
+    
+    selected_object.width = selected_object.getBoundingClientRect().x - bottom_right_grab.getBoundingClientRect().x + "px"
     selected_object.classList.remove('selectedobj');
     selected_object = null;
     selected_object = e.target;
     selected_object.classList.add('selectedobj');
     update_props()
   } else {
+    selector.style.display = "none"
+
     selected_object.style.border = "none";
     selected_object.classList.remove('selectedobj');
     selected_object = editor;
@@ -175,10 +191,9 @@ editor.addEventListener("click", function (e) {
 
 if(adding_element == false){
 editor.addEventListener("click",function(e){
-    // Make the DIV element draggable:
-    let divs = document.querySelectorAll("div")
-    let inputs = document.querySelectorAll("input")
     dragElement(selected_object)
+    //feature not complete
+    //dragElement(bottom_right_grab)
 
 
 function dragElement(elmnt) {
@@ -215,6 +230,12 @@ function dragElement(elmnt) {
     // set the element's new position:
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    selector.style.top = (elmnt.offsetTop - pos2 -10) + "px";
+    selector.style.left = (elmnt.offsetLeft - pos1 -10) + "px";
+    //feuture not complete
+    //bottom_right_grab.style.top = (elmnt.offsetTop - pos2 +selected_object.getBoundingClientRect().height - 10) + "px"
+    //bottom_right_grab.style.left = (elmnt.offsetLeft - pos2 +selected_object.getBoundingClientRect().width - 10) + "px"
+    //bottomright_drag_dimensions()
   }
 
   function closeDragElement() {
@@ -224,7 +245,11 @@ function dragElement(elmnt) {
   }
 }})}
 
-
+//function bottomright_drag_dimensions(){
+//  selected_object.style.width = bottom_right_grab.getClientRects().x +"px"
+//  selected_object.style.height = bottom_right_grab.getClientRects().y + "px"
+//
+//}
 document.getElementById("menu").addEventListener("click",function(){
   document.getElementById("addmenu").style.display = "none"
   if(property_menu_open == false){
@@ -304,4 +329,16 @@ document.addEventListener("keydown",function(e){
   }else if(key === 83){
     console.log(editor.innerHTML)
   }
+})
+
+//all functions to open prompts will be put inside here with varying the prompt parameter
+function open_prompt(prompt){
+  if(prompt === "create"){document.getElementById("create_pr_prompt").style.display = "block"}
+}
+function close_prompt(prompt){
+  if(prompt === "create"){document.getElementById("create_pr_prompt").style.display = "none"}
+}
+document.getElementById("projects_list").addEventListener("click",function(e){
+  console.log(`project ${e.target} clicked!!`)
+  document.getElementById("projects").style.display = "none"
 })

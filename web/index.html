@@ -10,6 +10,7 @@
         <!--Editor Body-->
         <div class="editor" id="editor">
             <div id="selectedbody" class="selectedbody"></div>
+            <div class="bottom_right" id="bottom_right"></div>
         </div>
 
         <!--Addable elements-->
@@ -111,6 +112,49 @@
 
             
         </div>
+
+        <div class="projects" id="projects">
+            <div class="project_navs">
+                <h1>Welcome to: kin Lab</h1>
+                <input type="text" placeholder="search projects">
+                <button id="create_pr" onclick="open_prompt('create')">Create</button>
+                <button>settings</button>
+            </div>
+            <div class="horizontal_sep"></div>
+            <div class="projects_list" id="projects_list">
+                <div class="sample_project1">
+                    <h1>Title</h1>
+                    <h2>Date</h2>
+                    <h3>pagecount</h3>
+                </div>
+                <div class="sample_project1">
+                    <h1>Title</h1>
+                    <h2>Date</h2>
+                    <h3>pagecount</h3>
+                </div>
+            </div>
+            <div class="create_pr_prompt" id="create_pr_prompt">
+                <!--an image must be added at the right part-->
+                <h1>Create project</h1>
+                <div class="project_props">
+                    <h2>project Name</h2>
+                    <input type="text" placeholder="project name" id="project_name">
+
+                    <h2>project Something</h2>
+                    <input type="text" placeholder="Havent found the right thing to ask here 😂">
+                </div>
+                <div class="action_btns">
+                    <button class="cancel_pr_cr" onclick="close_prompt('create')">Cancel</button>
+                    <button class="create_pr">Create</button>
+                </div>
+            </div>
+            <div class="settings">
+                <!--Settings not planned yet-->
+                <!--Note: settings will have properties like accent color and themeing stored with eel in txt files-->
+                <!--other properties added as nessesary-->
+            </div>
+        </div>
+        
         <script src="events.js"></script>
     </body>
 </html>

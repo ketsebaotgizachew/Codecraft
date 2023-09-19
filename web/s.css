@@ -42,8 +42,8 @@ body{
     left: -25px;
     right: -25px;
     bottom: -25px;
-    border: 2px dashed #5e5e5e;
-    border-radius: 15px;
+    border: 2px solid #202020;
+    border-radius: 4px;
 }
 .menu{
     position: absolute;
@@ -51,6 +51,7 @@ body{
     right: 15px;
     width: 30px;
     height: 30px;
+    border-radius: 10px;
     background-color: black;
 }
 .properties{
@@ -147,6 +148,7 @@ body{
     width: 300px;
     height: 92%;
     background-color: black;
+    overflow-y: scroll;
     display: none;
 }
 .addmenu button{
@@ -158,4 +160,167 @@ body{
     margin-top: 5px;
     margin-left: 8px;
     font-size: 18px;
+}
+.projects{
+    position: absolute;
+    width: 95%;
+    height: 95.5%;
+    background-color: rgb(15, 15, 15);
+    margin-top: 15px;
+    margin-left: 15px;
+    border-radius: 10px;
+    z-index: 9;
+    transition: 2s ease-out;
+}
+.projects_list div:hover{
+    background-color: rgb(34, 34, 34);
+}
+.project_navs h1{
+    color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    margin-left: 28px;
+    width: 250px;
+}
+.project_navs{
+    display: flex;
+}
+.project_navs input{
+    height: 31px;
+    margin-top: 15px;
+    margin-left: 46%;
+    padding-left: 5px;
+    background-color: rgb(43, 43, 43);
+    border: 1px solid rgb(75, 75, 75);
+    border-radius: 4px;
+    color: rgb(115, 8, 255);
+}
+.project_navs button{
+    margin-top: 15px;
+    margin-left: 5px;
+    border-radius: 4px;
+    height: 36px;
+    background-color: rgb(43, 43, 43);
+    border: none;
+    color: rgb(115, 8, 255);
+    width: 100px;
+}
+.project_navs button:hover{
+    background-color: rgb(63, 63, 63);
+}
+.horizontal_sep{
+    width: 98%;
+    margin-left: 1%;
+    margin-top: 5px;
+    height: 2px;
+    background-color: rgb(115, 8, 255);
+}
+.projects_list{
+    margin-top: 25px;
+}
+.projects_list div{
+    width: 95%;
+    height: 100px;
+    background-color: #161616;
+    margin-left: 2%;
+    margin-top: 10px;
+    cursor: pointer;
+    display: flex;
+    border: 1px solid rgb(60, 5, 133);
+    border-radius: 10px;
+}
+.projects_list h1{
+    display: block;
+    margin-left: 80px;
+    margin-top: 0px;
+    height: 85px;
+    width: 150px;
+    text-align: center;
+    padding-top: 5vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+.projects_list h2{
+    margin-left: 350px;
+    margin-top: 40px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+
+}
+.projects_list h3{
+    margin-left: 350px;
+    margin-top: 40px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+.create_pr_prompt{
+    position: absolute !important;
+    width: 100%;
+    height: 99.5%;
+    background-color: rgb(15, 15, 15);
+    margin-top: -303px;
+    margin-left: 2px;
+    border-radius: 10px;
+    z-index: 10;
+    display: none;
+    /* transition: 2s ease-out; */
+}
+.create_pr_prompt h1{
+    color: white;
+    margin-left: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+}
+.project_props{
+    color: rgb(100, 100, 100);
+    margin-left: 40px;
+}
+.project_props h2{
+    margin-top: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+}
+.project_props input{
+    width: 600px;
+    height: 35px;
+    background-color: rgb(34, 34, 34);
+    border: 1px solid rgb(53, 53, 53);
+    border-radius: 4px;
+    color: white;
+    padding-left: 25px;
+    transition: 1s;
+}
+.action_btns{
+    margin-top: 150px;
+    margin-left: 40px;
+}
+.action_btns button{
+    height: 35px;
+    width: 100px;
+    border: none;
+    background-color: rgb(46, 46, 46);
+    color: rgb(148, 66, 255);
+    border-radius: 4px;
+}
+.project_props input:hover{
+    border-color: rgb(82, 82, 82);
+}
+.selectedbody{
+    position: absolute;
+    border: 2px solid black;
+    display: none;
+}
+.bottom_right{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    z-index: 25;
+    border: 2px solid black;
+    display: none;
+}
+.bottom_right:hover{
+    transition: 1s;
+    background-color: black;
 }
