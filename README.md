@@ -1,6 +1,9 @@
 # HTML and CSS IDE
 
 ## Overview
+what the Ide is capable as of now(IMG support not yet)
+![Screenshot 2023-09-20 192805](https://github.com/ketsebaotgizachew/Codecraft/assets/112580228/3b69bcaa-468a-4f3c-ba5b-ff0a90f08713)
+![Screenshot 2023-09-20 192838](https://github.com/ketsebaotgizachew/Codecraft/assets/112580228/39b9263e-1865-4056-b00d-ad2cf83ad13e)
 
 The **Html and Css IDE** is an open-source drag-and-drop based Integrated Development Environment (IDE) designed for rapid creation of websites using HTML, CSS, and JavaScript. Unlike other competitors, **Html and Css IDE** prioritizes customizability without sacrificing the speed and convenience of drag-and-drop functionality.
 
