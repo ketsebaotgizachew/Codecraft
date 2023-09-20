@@ -1,5 +1,5 @@
 import { rgbToHex } from "./color-manager.js";
-import * as inducators from "./inducators.js"
+import { identify } from "./inducators.js";
 import { Rectangle } from "./rect.js";
 import { add_resisers,remove_resisers } from "./resizers.js";
 import { update_properties } from "./property-manager.js";
@@ -70,6 +70,7 @@ editor.addEventListener("contextmenu", function (e) {
   //move rightclick menu to position before displaying
   rightclickmenu.style.top = e.clientY + "px";
   rightclickmenu.style.left = e.clientX + "px";
+  rightclickmenu.style.height = "300px"
 
   //display rightclick menu
   rightclickmenu.style.display = "block";
@@ -164,6 +165,7 @@ export function call_add(type) {
 }
 export function add_menu_open(){
   document.getElementById("props").style.display = "none"
+  document.getElementById("menu").style.right = "328px"
   document.getElementById("addmenu").style.display = "block"
 }
 
@@ -183,7 +185,7 @@ editor.addEventListener("click", function (e) {
     bottom_right_grab = add_resisers(selected_object)
     dragElement(bottom_right_grab,selector,quadtree)
     selected_object.classList.add('selectedobj');
-    update_properties(inducators,selected_object)
+    update_properties(identify,selected_object,rgbToHex)
   } else {
     remove_resisers(selected_object)
     selected_object.style.border = "none";
@@ -195,7 +197,7 @@ editor.addEventListener("click", function (e) {
 
 if(adding_element == false){
 editor.addEventListener("click",function(e){
-    dragElement(selected_object,selected_object,quadtree)
+    dragElement(selected_object,selector,quadtree)
     //feature not complete
     //dragElement(bottom_right_grab)
 })}
@@ -211,30 +213,32 @@ document.getElementById("menu").addEventListener("click",function(){
   document.getElementById("addmenu").style.display = "none"
   if(property_menu_open == false){
     document.getElementById("props").style.display = "block"
+    document.getElementById("menu").style.right = "328px"
     property_menu_open = true
   }else{
     document.getElementById("props").style.display = "none"
+    document.getElementById("menu").style.right = "0px"
     property_menu_open = false
   }
 })
 
 
 export function change(what){
-  if(what === "id"){selected_object.id = inducators.ID_inducator.value}
-  if(what === "background_color"){selected_object.style.background = inducators.background_color.value}
-  if(what === "width"){selected_object.style.width = inducators.width_ind.value}
-  if(what === "height"){selected_object.style.height = inducators.height_ind.value}
-  if(what === "top"){selected_object.style.top = inducators.top_ind.value}
-  if(what === "left"){selected_object.style.left = inducators.left_ind.value}
-  if(what === "margin_all"){selected_object.style.margin = inducators.margin_all_ind.value}
-  if(what === "padding_all"){selected_object.style.padding = inducators.padding_all_ind.value}
-  if(what === "font_size"){selected_object.style.fontSize = inducators.font_size_ind.value}
-  if(what === "text_color"){selected_object.style.color = inducators.text_color_ind.value}
-  if(what === "text_color_text"){selected_object.style.color = inducators.text_color_text_ind.value}
-  if(what === "font_family"){selected_object.style.fontFamily = inducators.font_family_ind.value}
-  if(what === "text_decor"){selected_object.style.textDecoration = inducators.text_decoration_ind.value}
-  if(what === "font_weight"){selected_object.style.fontWeight = inducators.font_weight_ind.value}
-  if(what === "text_align"){selected_object.style.textAlign = inducators.text_align_ind.value}
+  if(what === "id"){selected_object.id = identify.ID_inducator.value}
+  if(what === "background_color"){selected_object.style.background = identify.background_color.value}
+  if(what === "width"){selected_object.style.width = identify.width_ind.value}
+  if(what === "height"){selected_object.style.height = identify.height_ind.value}
+  if(what === "top"){selected_object.style.top = identify.top_ind.value}
+  if(what === "left"){selected_object.style.left = identify.left_ind.value}
+  if(what === "margin_all"){selected_object.style.margin = identify.margin_all_ind.value}
+  if(what === "padding_all"){selected_object.style.padding = identify.padding_all_ind.value}
+  if(what === "font_size"){selected_object.style.fontSize = identify.font_size_ind.value}
+  if(what === "text_color"){selected_object.style.color = identify.text_color_ind.value}
+  if(what === "text_color_text"){selected_object.style.color = identify.text_color_text_ind.value}
+  if(what === "font_family"){selected_object.style.fontFamily = identify.font_family_ind.value}
+  if(what === "text_decor"){selected_object.style.textDecoration = identify.text_decoration_ind.value}
+  if(what === "font_weight"){selected_object.style.fontWeight = identify.font_weight_ind.value}
+  if(what === "text_align"){selected_object.style.textAlign = identify.text_align_ind.value}
   if(what === "content"){selected_object.innerText = content.innerText}
 }
 
@@ -253,7 +257,7 @@ export function change(what){
 //implement shortcut detection here using key codes
 document.addEventListener("keydown",function(e){
   key = e.keyCode || e.charCode;
-  if(key === 8 || key === 46){
+  if(key === 46){
     selected_object.remove()
   }else if(key === 83){
     console.log(editor.innerHTML)

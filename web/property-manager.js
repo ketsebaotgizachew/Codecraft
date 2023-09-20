@@ -3,7 +3,7 @@
  * @param {module} inducators - Module that exports Inducator elements
  * @param {Node} selected_object - Node to HTMLelement selected element 
  */
-export function update_properties(inducators,selected_object){
+export function update_properties(inducators,selected_object,rgbToHex){
     console.log("update properties called!!")
     console.log(inducators.ID_inducator)
     inducators.ID_inducator.value = selected_object.id

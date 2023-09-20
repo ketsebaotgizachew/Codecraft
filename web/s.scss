@@ -57,12 +57,12 @@ body{
     left: 0px;
     /* top and left */
     width: 300px;
-    height: 300px;
+    height: 0px;
     background-color: black;
     /* hidden by defult*/
     display: none;
-    border-radius: 5px;
-    
+    border-radius: 8px;
+    transition: 2s ease-out;
     button{
         width: 100%;
         border: none;
@@ -70,30 +70,40 @@ body{
         color: white;
         font-family: monospace;
         height: 40px;
+        &:hover{
+            background-color: rgb(31, 31, 31);
+        }
     }
 }
 .menu{
     position: absolute;
-    bottom: 15px;
-    right: 15px;
+    bottom: 0px;
+    right: 0px;
     width: 30px;
     height: 30px;
-    border-radius: 10px;
+    border-radius: 10px 0px 0px 10px;
     background-color: rgb(17, 17, 17);
     border: 1px solid rgb(41, 41, 41);
 }
+.props_tit{
+    position: fixed;
+    color: rgb(253 253 253);
+    margin-top: -24px;
+}
 .properties{
     position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 400px;
-    height: 92%;
-    background-color: black;
+    top: 0px;
+    right: 0px;
+    width: 300px;
+    height: 100vh;
+    padding-right: 16px;
+    background-color: rgb(20, 20, 20);
     padding-left: 15px;
     display: none;
     overflow-y: scroll;
+    border-top: 30px solid rgb(115, 8, 255);
     h1{
-        font-size: 20px;
+        font-size: 19px;
         color: white;
         font-family: $Theme_font;
     }
@@ -102,23 +112,30 @@ body{
         height: 35px;
         background-color: $Theme_color;
         border: none;
-        margin-top: 5px;
+        margin-top: 3px;
         margin-left: 5px;
+        border-radius: 4px;
+        cursor: pointer;
+        &:hover{
+            background-color: rgb(41, 41, 41);
+        }
     }
     input{
-        color: rgb(160, 160, 160);
-        background-color: $Theme_color;
-        border: none;
-        height: 35px;
+        background-color: rgb(34, 34, 34);
+        border: 1px solid rgb(53, 53, 53);
         border-radius: 4px;
+        color: white;
+        padding-left: 25px;
+        height: 30px;
         font-family: $Theme_font;
-        padding-left: 15px;
-        font-size: 20px;
+        font-size: 18px;
         width: 89%;
-        margin-top: 5px;
-        
+        margin-top: 3px;
+        &:hover{
+            border-color: rgb(115, 8, 255);
+        }
         &:focus{
-            outline: 1px solid grey;
+            outline: 1px solid rgb(82, 82, 82);
             color: white;
         
         }
@@ -160,7 +177,7 @@ body{
     }
     
     .scroll_max{
-        margin-top: 150px;
+        margin-top: 45px;
     }
     .color_selector{
         display: flex;
@@ -177,11 +194,12 @@ body{
 
 .addmenu{
     position: absolute;
-    top: 5px;
-    right: 5px;
-    width: 300px;
-    height: 92%;
-    background-color: black;
+    top: 0px;
+    right: 0px;
+    width: 328px;
+    height: 100vh;
+    background-color: rgb(20, 20, 20);
+    border-top: 30px solid rgb(115, 8, 255);
     overflow-y: scroll;
     display: none;
 
@@ -194,16 +212,17 @@ body{
         margin-top: 5px;
         margin-left: 8px;
         font-size: 18px;
+        &:hover{
+            background-color: rgb(68, 68, 68);
+        }
     }
 }
 
 .projects{
     position: absolute;
-    width: 95%;
-    height: 95.5%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgb(15, 15, 15);
-    margin-left: 15px;
-    border-radius: 10px;
     z-index: 9;
     transition: 2s ease-out;
     .horizontal_sep{
@@ -253,7 +272,6 @@ body{
     
 }
 .projects_list{
-    margin-top: 25px;
     div:hover{
         background-color: rgb(34, 34, 34);
     }
@@ -266,7 +284,7 @@ body{
         cursor: pointer;
         display: flex;
         border: 1px solid rgb(60, 5, 133);
-        border-radius: 10px;
+        border-radius: 0px;
     }
     h1{
         display: block;

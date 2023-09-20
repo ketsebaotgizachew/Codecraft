@@ -63,11 +63,15 @@
 
         <!--properties prompt-->
         <div class="properties" id="props">
+            <p class="props_tit">Properties</p>
             <h1>ID Name</h1>
             <input type="text" id="ID_inducator" onchange="main.change('id')" placeholder="Not-Set"/>
 
             <h1>position</h1>
             <input type="text" id="position" placeholder="default-absolute">
+            
+            <h1>display</h1>
+            <input type="text" placeholder="default-block">
 
             <h1>Background-color</h1>
             <input type="color" id="background_color" oninput="main.change('background_color')" />
@@ -100,6 +104,7 @@
 
             <div class="text_only">
                 <h1>Text properties</h1>
+                <input type="text" placeholder="type">
                 <input type="text" placeholder="content" id="content" oninput="main.change('content')">
                 <input type="text" placeholder="font size" id="font_size" onchange="main.change('font_size')">
                 <div class="color_selector">
@@ -112,18 +117,28 @@
                 <input type="text" placeholder="text-align" id="text_align" onchange="main.change('text_align')">
             </div>
 
+            <div class="img_props">
+                <h1>Image Properties</h1>
+                <input type="text" placeholder="img-url" id="img_url">
+                <input type="text" placeholder="image-repeat" id="image_repeat">
+                <input type="text" placeholder="img-size">
+            </div>
 
             <div class="others">
                 <h1>others</h1>
                 <input type="text" placeholder="border" id="border">
+                <input type="text" placeholder="border-radius">
+                <input type="text" placeholder="backdrop">
+                <input type="text" placeholder="opacity">
+                <input type="text" placeholder="visiblity">
                 <input type="text" placeholder="box-shadow" id="box_shadow">
                 <input type="text" placeholder="z-index" id="Z_index">
                 <input type="text" placeholder="display" id="display">
-                <input type="text" placeholder="img-url" id="img_url">
-                <input type="text" placeholder="image-repeat" id="image_repeat">
                 <input type="text" placeholder="overflow-x" id="overflow_x">
                 <input type="text" placeholder="overflow-y" id="overflow_y">
-
+                <input type="text" placeholder="justify-content">
+                <input type="text" placeholder="align-self">
+                <input type="text" placeholder="align-content">
             </div>
 
             <!--to keep the last property elements from cliping when the scroll ends-->

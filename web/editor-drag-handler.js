@@ -41,7 +41,7 @@ export function dragElement(elmnt,selector,quadtree) {
       selector.style.top = (elmnt.offsetTop - pos2 -10) + "px";
       selector.style.left = (elmnt.offsetLeft - pos1 -10) + "px";
   
-      let nerbyobjects = quadtree.retrieve({x: elmnt.offsetLeft, y: elmnt.offsetTop, snap_radius: snapThreshold});
+      //let nerbyobjects = quadtree.retrieve({x: elmnt.offsetLeft, y: elmnt.offsetTop, snap_radius: snapThreshold});
       //feuture not complete
       //bottom_right_grab.style.top = (elmnt.offsetTop - pos2 +selected_object.getBoundingClientRect().height - 10) + "px"
       //bottom_right_grab.style.left = (elmnt.offsetLeft - pos2 +selected_object.getBoundingClientRect().width - 10) + "px"

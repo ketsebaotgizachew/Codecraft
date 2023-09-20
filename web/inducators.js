@@ -1,20 +1,24 @@
-export let ID_inducator = document.getElementById("ID_inducator")
-export let background_color = document.getElementById("background_color")
-export let position_ind = document.getElementById("position")
-export let width_ind = document.getElementById("width")
-export let height_ind = document.getElementById("height")
-export let top_ind = document.getElementById("top")
-export let left_ind = document.getElementById("left")
-export let margin_all_ind = document.getElementById("margin_all")
-export let padding_all_ind = document.getElementById("padding_all") 
-//text eligable tags
-export let txt_eligable_tags = ["span","h1","h2","h3","h4","h5","h6","h7","input","text-area"]
-//this properties are for text only objects
-export let font_size_ind = document.getElementById("font_size")
-export let text_color_text_ind = document.getElementById("text_color_text")
-export let text_color_ind = document.getElementById("text_color")
-export let font_family_ind = document.getElementById("font_family")
-export let text_decoration_ind = document.getElementById("text_decoration")
-export let font_weight_ind = document.getElementById("font_weight")
-export let text_align_ind = document.getElementById("text_align")
-export let content = document.getElementById("content")
+
+export let identify = {
+    ID_inducator:  document.getElementById("ID_inducator"),
+    background_color:  document.getElementById("background_color"),
+    position_ind:  document.getElementById("position"),
+    width_ind:  document.getElementById("width"),
+    height_ind:  document.getElementById("height"),
+    top_ind:  document.getElementById("top"),
+    left_ind:  document.getElementById("left"),
+    margin_all_ind:  document.getElementById("margin_all"),
+    padding_all_ind:  document.getElementById("padding_all"), 
+
+    txt_eligable_tags:  ["span","h1","h2","h3","h4","h5","h6","h7","input","text-area"],
+
+    font_size_ind:  document.getElementById("font_size"),
+    text_color_text_ind:  document.getElementById("text_color_text"),
+    text_color_ind:  document.getElementById("text_color"),
+    font_family_ind:  document.getElementById("font_family"),
+    text_decoration_ind:  document.getElementById("text_decoration"),
+    font_weight_ind:  document.getElementById("font_weight"),
+    text_align_ind:  document.getElementById("text_align"),
+    content:  document.getElementById("content")
+}
+
