@@ -3,8 +3,10 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Kinder</title>
         <link rel="stylesheet" href="s.css" />
+        <link rel="stylesheet" href="./js-window-css/jscode-window.css">
+        <script src="./quadtree-js/quadtree.min.js"></script>
     </head>
     <body>
         <!--Editor Body-->
@@ -15,29 +17,46 @@
 
         <!--Addable elements-->
         <div class="addmenu" id="addmenu">
-            <button onclick="call_add('div')">Div</button>
-            <button onclick="call_add('input')">input</button>
-            <button onclick="call_add('h1')">H1 to H6</button>
-            <button onclick="call_add('textarea')">TextArea</button>
-            <button onclick="call_add('button')">Button</button>
-            <button onclick="call_add('area')">Area</button>
-            <button onclick="call_add('canvas')">Canvas</button>
-            <button onclick="call_add('img')">Img</button>
-            <button onclick="call_add('a')">link</button>
-            <button onclick="call_add('select')">selector</button>
-            <button onclick="call_add('option')">options</button>
-            <button onclick="call_add('source')">source</button>
-            <button onclick="call_add('span')">span</button>
-            <button onclick="call_add('svg')">svg</button>
-            <button onclick="call_add('video')">video</button>
-            <button onclick="call_add('object')">object</button>
-            <button onclick="call_add('nav')">nav</button>
-            <button onclick="call_add('canvas')">canvas</button>
+            <button onclick="main.call_add('div')">Div</button>
+            <button onclick="main.call_add('input')">input</button>
+            <button onclick="main.call_add('h1')">H1 to H6</button>
+            <button onclick="main.call_add('textarea')">TextArea</button>
+            <button onclick="main.call_add('button')">Button</button>
+            <button onclick="main.call_add('area')">Area</button>
+            <button onclick="main.call_add('canvas')">Canvas</button>
+            <button onclick="main.call_add('img')">Img</button>
+            <button onclick="main.call_add('a')">link</button>
+            <button onclick="main.call_add('select')">selector</button>
+            <button onclick="main.call_add('option')">options</button>
+            <button onclick="main.call_add('source')">source</button>
+            <button onclick="main.call_add('span')">span</button>
+            <button onclick="main.call_add('svg')">svg</button>
+            <button onclick="main.call_add('video')">video</button>
+            <button onclick="main.call_add('object')">object</button>
+            <button onclick="main.call_add('nav')">nav</button>
+            <button onclick="main.call_add('canvas')">canvas</button>
         </div>
+
+        <!--js code editor window-->
+        <div class="jscode_window" id="jscode_window">
+            <button onclick="window_manager.close_prompt('code')">close code editor</button>
+            <div class="lines_count">
+                <div class="number">
+                    <h1>1</h1>
+                </div>
+            </div>
+            <div class="text_area" id="text_area">
+                <textarea type="text" id="code_area" placeholder="start typing here..." ></textarea>
+                <div class="highlight" id="highlight"></div>
+            
+            </div>
+        </div>
+
 
         <!--right click add button-->
         <div class="rightclick" id="rightclick">
-            <button id="add" onclick="add_menu_open()">Add</button>
+            <button id="add" onclick="main.add_menu_open()">Add</button>
+            <button id="jscode" class="jscode">js codespace</button>
         </div>
         <!--Add Menu For the addable elements-->
         <div class="menu" id="menu"></div>
@@ -45,34 +64,34 @@
         <!--properties prompt-->
         <div class="properties" id="props">
             <h1>ID Name</h1>
-            <input type="text" id="ID_inducator" onchange="change('id')" placeholder="Not-Set"/>
+            <input type="text" id="ID_inducator" onchange="main.change('id')" placeholder="Not-Set"/>
 
             <h1>position</h1>
             <input type="text" id="position" placeholder="default-absolute">
 
             <h1>Background-color</h1>
-            <input type="color" id="background_color" oninput="change('background_color')" />
+            <input type="color" id="background_color" oninput="main.change('background_color')" />
 
             <h1>scale</h1>
             <div class="scale">
-                <input type="text" placeholder="width" id="width" onchange="change('width')"/>
-                <input type="text" placeholder="height" id="height" onchange="change('height')"/>
+                <input type="text" placeholder="width" id="width" onchange="main.change('width')"/>
+                <input type="text" placeholder="height" id="height" onchange="main.change('height')"/>
             </div>
             <div class="dimension">
-                <input type="text" placeholder="top" id="top" onchange="change('top')"/>
-                <input type="text" placeholder="left" id="left" onchange="change('left')"/>
+                <input type="text" placeholder="top" id="top" onchange="main.change('top')"/>
+                <input type="text" placeholder="left" id="left" onchange="main.change('left')"/>
             </div>
 
             <div class="margin_padding">
                 <h1>margin</h1>
                 <div class="margin_holder">
-                    <input type="text" placeholder="margin" id="margin_all" onchange="change('margin_all')"/>
+                    <input type="text" placeholder="margin" id="margin_all" onchange="main.change('margin_all')"/>
                     <button>custom</button>
                 </div>
 
                 <h1>padding</h1>
                 <div class="padding_holder">
-                    <input type="text" placeholder="padding" id="padding_all" onchange="change('padding_all')">
+                    <input type="text" placeholder="padding" id="padding_all" onchange="main.change('padding_all')">
                     <button>custom</button>
                 </div>
 
@@ -81,16 +100,16 @@
 
             <div class="text_only">
                 <h1>Text properties</h1>
-                <input type="text" placeholder="content" id="content" oninput="change('content')">
-                <input type="text" placeholder="font size" id="font_size" onchange="change('font_size')">
+                <input type="text" placeholder="content" id="content" oninput="main.change('content')">
+                <input type="text" placeholder="font size" id="font_size" onchange="main.change('font_size')">
                 <div class="color_selector">
-                    <input type="text" placeholder="color" id="text_color_text" onchange="change('font_color_text')">
-                    <input type="color" id="text_color" oninput="change('text_color')">
+                    <input type="text" placeholder="color" id="text_color_text" onchange="main.change('font_color_text')">
+                    <input type="color" id="text_color" oninput="main.change('text_color')">
                 </div>
-                <input type="text" placeholder="font-family" id="font_family" onchange="change('font_family')">
-                <input type="text" placeholder="text-decoration" id="text_decoration" onchange="change('text_decor')">
-                <input type="text" placeholder="font-weight" id="font_weight" onchange="change('font_weight')">
-                <input type="text" placeholder="text-align" id="text_align" onchange="change('text_align')">
+                <input type="text" placeholder="font-family" id="font_family" onchange="main.change('font_family')">
+                <input type="text" placeholder="text-decoration" id="text_decoration" onchange="main.change('text_decor')">
+                <input type="text" placeholder="font-weight" id="font_weight" onchange="main.change('font_weight')">
+                <input type="text" placeholder="text-align" id="text_align" onchange="main.change('text_align')">
             </div>
 
 
@@ -117,7 +136,7 @@
             <div class="project_navs">
                 <h1>Welcome to: kin Lab</h1>
                 <input type="text" placeholder="search projects">
-                <button id="create_pr" onclick="open_prompt('create')">Create</button>
+                <button id="create_pr" onclick="window_manager.open_prompt('create')">Create</button>
                 <button>settings</button>
             </div>
             <div class="horizontal_sep"></div>
@@ -144,7 +163,7 @@
                     <input type="text" placeholder="Havent found the right thing to ask here 😂">
                 </div>
                 <div class="action_btns">
-                    <button class="cancel_pr_cr" onclick="close_prompt('create')">Cancel</button>
+                    <button class="cancel_pr_cr" onclick="window_manager.close_prompt('create')">Cancel</button>
                     <button class="create_pr">Create</button>
                 </div>
             </div>
@@ -155,6 +174,14 @@
             </div>
         </div>
         
-        <script src="events.js"></script>
+        <script type="module" src="events.js"></script>
+        <script type="module">
+            import * as main from "./events.js"
+            import * as window_manager from "./prompt_manager.js"
+            import * as input_handler from "../jscoder/js-input-handler.js"
+            window.window_manager = window_manager
+            window.main = main
+            window.input_handler = input_handler
+        </script>
     </body>
 </html>

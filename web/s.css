@@ -1,326 +1,333 @@
-body{
-    background-color: rgb(17, 0, 90);
-    overflow: hidden;
-    margin: 0px;
-}
-.editor{
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-color: white;
-}
-.rightclick{
-    position: absolute;
-    /*just if it dosent work unless this two are usless here*/
-    top: 0px;
-    left: 0px;
-    /* top and left */
-    width: 300px;
-    height: 300px;
-    background-color: black;
-    /* hidden by defult*/
-    display: none;
-    border-radius: 5px;
-}
-.rightclick button{
-    width: 100%;
-    border: none;
-    background-color: rgb(15, 15, 15);
-    color: white;
-    font-family: monospace;
-    height: 40px;
+body {
+  background-color: rgb(17, 0, 90);
+  overflow: hidden;
+  margin: 0px;
 }
 
-.editor input{
-    cursor: pointer;
+.editor {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: -5;
+  background-color: white;
+}
+.editor input {
+  cursor: pointer;
+}
+.editor .selectedbody {
+  position: absolute;
+  border: 2px solid black;
+  display: none;
+}
+.editor .bottom_right {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  z-index: 25;
+  border: 2px solid black;
+  display: none;
+}
+.editor .bottom_right:hover {
+  transition: 1s;
+  background-color: black;
 }
 
-.editor .selectedobj::after {
-    content: "";
-    position: absolute;
-    top: -25px;
-    left: -25px;
-    right: -25px;
-    bottom: -25px;
-    border: 2px solid #202020;
-    border-radius: 4px;
+.selectedobj::after {
+  content: "";
+  position: absolute;
+  top: -25px;
+  left: -25px;
+  right: -25px;
+  bottom: -25px;
+  border: 2px solid #202020;
+  border-radius: 4px;
 }
-.menu{
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    width: 30px;
-    height: 30px;
-    border-radius: 10px;
-    background-color: black;
-}
-.properties{
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 400px;
-    height: 92%;
-    background-color: black;
-    padding-left: 15px;
-    display: none;
-    overflow-y: scroll;
-}
-.properties h1{
-    font-size: 20px;
-    color: white;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-.properties input{
-    color: rgb(160, 160, 160);
-    background-color: rgb(43, 43, 43);
-    border: none;
-    height: 35px;
-    border-radius: 4px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding-left: 15px;
-    font-size: 20px;
-    width: 89%;
-    margin-top: 5px;
-}
-.properties input:focus{
-    outline: 1px solid grey;
-    color: white;
 
+.rightclick {
+  position: absolute;
+  /*just if it dosent work unless this two are usless here*/
+  top: 0px;
+  left: 0px;
+  /* top and left */
+  width: 300px;
+  height: 300px;
+  background-color: black;
+  /* hidden by defult*/
+  display: none;
+  border-radius: 5px;
 }
-.properties input[type="color"] {
-    background-color: rgba(43, 43, 43, 0);
-    padding-left: 0px;
-    width: 95%;
-    height: 50px;
-    border: none;
-    outline: none;
-    border-radius: 4px;
+.rightclick button {
+  width: 100%;
+  border: none;
+  background-color: rgb(15, 15, 15);
+  color: white;
+  font-family: monospace;
+  height: 40px;
 }
-.properties button{
-    color: white;
-    height: 35px;
-    background-color: rgb(43, 43, 43);
-    border: none;
-    margin-top: 5px;
-    margin-left: 5px;
-}
-.margin_padding div{
-    display: flex;
-}
-.margin_padding div input{
-    width: 70%;
-}
-.scale{
-    display: flex;
-}
-.scale input{
-    width: 40%;
-}
-.scale #height{
-    margin-left: 10px;
-}
-.dimension{
-    display: flex;
-}
-.dimension input{
-    width: 40%;
-}
-.dimension #left{
-    margin-left: 10px;
-}
-.scroll_max{
-    margin-top: 150px;
-}
-.color_selector{
-    display: flex;
-}
-.color_selector input[type = "color"]{
-    margin-top: 0px;
-    height: 45px;
-    width: 50%;
-    margin-right: 24px;
-    margin-left: 5px;
-}
-.addmenu{
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    width: 300px;
-    height: 92%;
-    background-color: black;
-    overflow-y: scroll;
-    display: none;
-}
-.addmenu button{
-    color: white;
-    width: 95%;
-    height: 35px;
-    background-color: rgb(43, 43, 43);
-    border: none;
-    margin-top: 5px;
-    margin-left: 8px;
-    font-size: 18px;
-}
-.projects{
-    position: absolute;
-    width: 95%;
-    height: 95.5%;
-    background-color: rgb(15, 15, 15);
-    margin-top: 15px;
-    margin-left: 15px;
-    border-radius: 10px;
-    z-index: 9;
-    transition: 2s ease-out;
-}
-.projects_list div:hover{
-    background-color: rgb(34, 34, 34);
-}
-.project_navs h1{
-    color: rgb(255, 255, 255);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 24px;
-    margin-left: 28px;
-    width: 250px;
-}
-.project_navs{
-    display: flex;
-}
-.project_navs input{
-    height: 31px;
-    margin-top: 15px;
-    margin-left: 46%;
-    padding-left: 5px;
-    background-color: rgb(43, 43, 43);
-    border: 1px solid rgb(75, 75, 75);
-    border-radius: 4px;
-    color: rgb(115, 8, 255);
-}
-.project_navs button{
-    margin-top: 15px;
-    margin-left: 5px;
-    border-radius: 4px;
-    height: 36px;
-    background-color: rgb(43, 43, 43);
-    border: none;
-    color: rgb(115, 8, 255);
-    width: 100px;
-}
-.project_navs button:hover{
-    background-color: rgb(63, 63, 63);
-}
-.horizontal_sep{
-    width: 98%;
-    margin-left: 1%;
-    margin-top: 5px;
-    height: 2px;
-    background-color: rgb(115, 8, 255);
-}
-.projects_list{
-    margin-top: 25px;
-}
-.projects_list div{
-    width: 95%;
-    height: 100px;
-    background-color: #161616;
-    margin-left: 2%;
-    margin-top: 10px;
-    cursor: pointer;
-    display: flex;
-    border: 1px solid rgb(60, 5, 133);
-    border-radius: 10px;
-}
-.projects_list h1{
-    display: block;
-    margin-left: 80px;
-    margin-top: 0px;
-    height: 85px;
-    width: 150px;
-    text-align: center;
-    padding-top: 5vh;
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-}
-.projects_list h2{
-    margin-left: 350px;
-    margin-top: 40px;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 18px;
 
+.menu {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: rgb(17, 17, 17);
+  border: 1px solid rgb(41, 41, 41);
 }
-.projects_list h3{
-    margin-left: 350px;
-    margin-top: 40px;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
 
+.properties {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 400px;
+  height: 92%;
+  background-color: black;
+  padding-left: 15px;
+  display: none;
+  overflow-y: scroll;
 }
-.create_pr_prompt{
-    position: absolute !important;
-    width: 100%;
-    height: 99.5%;
-    background-color: rgb(15, 15, 15);
-    margin-top: -303px;
-    margin-left: 2px;
-    border-radius: 10px;
-    z-index: 10;
-    display: none;
-    /* transition: 2s ease-out; */
+.properties h1 {
+  font-size: 20px;
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-.create_pr_prompt h1{
-    color: white;
-    margin-left: 40px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 40px;
+.properties button {
+  color: white;
+  height: 35px;
+  background-color: rgb(43, 43, 43);
+  border: none;
+  margin-top: 5px;
+  margin-left: 5px;
 }
-.project_props{
-    color: rgb(100, 100, 100);
-    margin-left: 40px;
+.properties input {
+  color: rgb(160, 160, 160);
+  background-color: rgb(43, 43, 43);
+  border: none;
+  height: 35px;
+  border-radius: 4px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding-left: 15px;
+  font-size: 20px;
+  width: 89%;
+  margin-top: 5px;
 }
-.project_props h2{
-    margin-top: 100px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 25px;
+.properties input:focus {
+  outline: 1px solid grey;
+  color: white;
 }
-.project_props input{
-    width: 600px;
-    height: 35px;
-    background-color: rgb(34, 34, 34);
-    border: 1px solid rgb(53, 53, 53);
-    border-radius: 4px;
-    color: white;
-    padding-left: 25px;
-    transition: 1s;
+.properties input[type=color] {
+  background-color: rgba(43, 43, 43, 0);
+  padding-left: 0px;
+  width: 95%;
+  height: 50px;
+  border: none;
+  outline: none;
+  border-radius: 4px;
 }
-.action_btns{
-    margin-top: 150px;
-    margin-left: 40px;
+.properties .margin_padding div {
+  display: flex;
 }
-.action_btns button{
-    height: 35px;
-    width: 100px;
-    border: none;
-    background-color: rgb(46, 46, 46);
-    color: rgb(148, 66, 255);
-    border-radius: 4px;
+.properties .margin_padding div input {
+  width: 70%;
 }
-.project_props input:hover{
-    border-color: rgb(82, 82, 82);
+.properties .scale {
+  display: flex;
 }
-.selectedbody{
-    position: absolute;
-    border: 2px solid black;
-    display: none;
+.properties .scale input {
+  width: 40%;
 }
-.bottom_right{
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    z-index: 25;
-    border: 2px solid black;
-    display: none;
+.properties .scale #height {
+  margin-left: 10px;
 }
-.bottom_right:hover{
-    transition: 1s;
-    background-color: black;
+.properties .dimension {
+  display: flex;
 }
+.properties .dimension input {
+  width: 40%;
+}
+.properties .dimension #left {
+  margin-left: 10px;
+}
+.properties .scroll_max {
+  margin-top: 150px;
+}
+.properties .color_selector {
+  display: flex;
+}
+.properties .color_selector input[type=color] {
+  margin-top: 0px;
+  height: 45px;
+  width: 50%;
+  margin-right: 24px;
+  margin-left: 5px;
+}
+
+.addmenu {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 300px;
+  height: 92%;
+  background-color: black;
+  overflow-y: scroll;
+  display: none;
+}
+.addmenu button {
+  color: white;
+  width: 95%;
+  height: 35px;
+  background-color: rgb(43, 43, 43);
+  border: none;
+  margin-top: 5px;
+  margin-left: 8px;
+  font-size: 18px;
+}
+
+.projects {
+  position: absolute;
+  width: 95%;
+  height: 95.5%;
+  background-color: rgb(15, 15, 15);
+  margin-left: 15px;
+  border-radius: 10px;
+  z-index: 9;
+  transition: 2s ease-out;
+}
+.projects .horizontal_sep {
+  width: 98%;
+  margin-left: 1%;
+  margin-top: 5px;
+  height: 2px;
+  background-color: rgb(115, 8, 255);
+}
+
+.project_navs {
+  display: flex;
+}
+.project_navs h1 {
+  color: rgb(255, 255, 255);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  margin-left: 28px;
+  width: 250px;
+}
+.project_navs input {
+  height: 31px;
+  margin-top: 15px;
+  margin-left: 46%;
+  padding-left: 5px;
+  background-color: rgb(43, 43, 43);
+  border: 1px solid rgb(75, 75, 75);
+  border-radius: 4px;
+  color: rgb(115, 8, 255);
+}
+.project_navs button {
+  margin-top: 15px;
+  margin-left: 5px;
+  border-radius: 4px;
+  height: 36px;
+  background-color: rgb(43, 43, 43);
+  border: none;
+  color: rgb(115, 8, 255);
+  width: 100px;
+}
+.project_navs button:hover {
+  background-color: rgb(63, 63, 63);
+}
+
+.projects_list {
+  margin-top: 25px;
+}
+.projects_list div:hover {
+  background-color: rgb(34, 34, 34);
+}
+.projects_list div {
+  width: 95%;
+  height: 100px;
+  background-color: #161616;
+  margin-left: 2%;
+  margin-top: 10px;
+  cursor: pointer;
+  display: flex;
+  border: 1px solid rgb(60, 5, 133);
+  border-radius: 10px;
+}
+.projects_list h1 {
+  display: block;
+  margin-left: 80px;
+  margin-top: 0px;
+  height: 85px;
+  width: 150px;
+  text-align: center;
+  padding-top: 5vh;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
+.projects_list h2 {
+  margin-left: 350px;
+  margin-top: 40px;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+}
+.projects_list h3 {
+  margin-left: 350px;
+  margin-top: 40px;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.create_pr_prompt {
+  position: absolute !important;
+  width: 100%;
+  height: 99.5%;
+  background-color: rgb(15, 15, 15);
+  margin-top: -303px;
+  margin-left: 2px;
+  border-radius: 10px;
+  z-index: 10;
+  display: none;
+  /* transition: 2s ease-out; */
+}
+.create_pr_prompt h1 {
+  color: white;
+  margin-left: 40px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 40px;
+}
+.create_pr_prompt .action_btns {
+  margin-top: 150px;
+  margin-left: 40px;
+}
+.create_pr_prompt .action_btns button {
+  height: 35px;
+  width: 100px;
+  border: none;
+  background-color: rgb(46, 46, 46);
+  color: rgb(148, 66, 255);
+  border-radius: 4px;
+}
+
+.project_props {
+  color: rgb(100, 100, 100);
+  margin-left: 40px;
+}
+.project_props h2 {
+  margin-top: 100px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+}
+.project_props input {
+  width: 600px;
+  height: 35px;
+  background-color: rgb(34, 34, 34);
+  border: 1px solid rgb(53, 53, 53);
+  border-radius: 4px;
+  color: white;
+  padding-left: 25px;
+  transition: 1s;
+}
+.project_props input:hover {
+  border-color: rgb(82, 82, 82);
+}/*# sourceMappingURL=s.css.map */

@@ -1,4 +1,9 @@
-
+import { rgbToHex } from "./color-manager.js";
+import * as inducators from "./inducators.js"
+import { Rectangle } from "./rect.js";
+import { add_resisers,remove_resisers } from "./resizers.js";
+import { update_properties } from "./property-manager.js";
+import { dragElement } from "./editor-drag-handler.js";
 
 //default colors for editor
 let default_div_color = "blue";
@@ -8,6 +13,13 @@ let default_text_color = "black";
 //element to prevent now when something is being added in the editor
 let adding_element = false;
 let editor = document.getElementById("editor");
+
+
+//editor_client_rect
+let edcr = editor.getClientRects()
+let editor_scale = [edcr.x,edcr.y,edcr.width,edcr.height]
+
+
 let rightclickmenu = document.getElementById("rightclick");
 
 //debuger_prints when only in debug mode
@@ -22,34 +34,22 @@ let property_menu_open = false;
 
 let first_clicked = false;
 
-let ID_inducator = document.getElementById("ID_inducator")
-let background_color = document.getElementById("background_color")
-let position_ind = document.getElementById("position")
-let width_ind = document.getElementById("width")
-let height_ind = document.getElementById("height")
-let top_ind = document.getElementById("top")
-let left_ind = document.getElementById("left")
-let margin_all_ind = document.getElementById("margin_all")
-let padding_all_ind = document.getElementById("padding_all")
+let snapping_enabled = true;
 
-//text eligable tags
-let txt_eligable_tags = ["span","h1","h2","h3","h4","h5","h6","h7","input","text-area"]
-//this properties are for text only objects
-let font_size_ind = document.getElementById("font_size")
-let text_color_text_ind = document.getElementById("text_color_text")
-let text_color_ind = document.getElementById("text_color")
-let font_family_ind = document.getElementById("font_family")
-let text_decoration_ind = document.getElementById("text_decoration")
-let font_weight_ind = document.getElementById("font_weight")
-let text_align_ind = document.getElementById("text_align")
-let content = document.getElementById("content")
-
+//this key is changed every keybored press to the keycode of the key pressed
 let key;
+
+let snap_radius = 50;
+let snapThreshold = 20;
 
 //for side grab selectors
 let bottom_right_grab = document.getElementById("bottom_right")
 
-function debugger_print(text) {
+
+let quadtree = new Quadtree(new Rectangle(0, 0,editor_scale[2] , editor_scale[3]));
+
+//silly me will be deleted later
+export function debugger_print(text) {
   if (debug_mode == true) {
     console.log(
       "you are seeing these text because debug mode is enabled disable it in event.js"
@@ -59,12 +59,18 @@ function debugger_print(text) {
 }
 
 //preventing defult rightclick
-//updates preventing right click only on eitor
+//updates preventing right click only on editor
+//some bug is affecting rightclick menu: bug Replication:unknown(press the right click 
+//and press the editor a bunch of times till the menu closes and suddenly when you open the
+//rightclick menu up it closes instantly when you move the mouse)
+
 editor.addEventListener("contextmenu", function (e) {
   e.preventDefault();
+
   //move rightclick menu to position before displaying
   rightclickmenu.style.top = e.clientY + "px";
   rightclickmenu.style.left = e.clientX + "px";
+
   //display rightclick menu
   rightclickmenu.style.display = "block";
 
@@ -74,12 +80,12 @@ editor.addEventListener("contextmenu", function (e) {
       rightclickmenu.style.display = "none";
     }, 1500);
   });
-  rightclickmenu.addEventListener("mouseover", function () {
+  rightclickmenu.addEventListener("mouseover", function() {
     rightclickmenu.style.display = "block";
   });
 });
 
-function add_element(type,color) {
+export function add_element(type,color) {
   let start_pos_x = 0;
   let start_pos_y = 0;
   let end_pos_x = 0;
@@ -150,23 +156,19 @@ function add_element(type,color) {
   }
 }
 
+
 //adding div when button clicked
-function call_add(type) {
+export function call_add(type) {
   adding_element = true;
   add_element(type,"cyan");
 }
-function add_menu_open(){
+export function add_menu_open(){
   document.getElementById("props").style.display = "none"
   document.getElementById("addmenu").style.display = "block"
 }
 
 editor.addEventListener("click", function (e) {
   if (e.target && e.target !== editor) {
-    selector.style.top = selected_object.getBoundingClientRect().y - 10 +"px"
-    selector.style.left = selected_object.getBoundingClientRect().x - 10 +"px"
-    selector.style.width = selected_object.getBoundingClientRect().width +10+"px"
-    selector.style.height = selected_object.getBoundingClientRect().height +10+"px"
-    selector.style.display = "block"
 
     //bottom right grabber feature not complete
     //bottom_right_grab.style.display = "block"
@@ -175,13 +177,15 @@ editor.addEventListener("click", function (e) {
     
     selected_object.width = selected_object.getBoundingClientRect().x - bottom_right_grab.getBoundingClientRect().x + "px"
     selected_object.classList.remove('selectedobj');
+    remove_resisers(selected_object)
     selected_object = null;
     selected_object = e.target;
+    bottom_right_grab = add_resisers(selected_object)
+    dragElement(bottom_right_grab,selector,quadtree)
     selected_object.classList.add('selectedobj');
-    update_props()
+    update_properties(inducators,selected_object)
   } else {
-    selector.style.display = "none"
-
+    remove_resisers(selected_object)
     selected_object.style.border = "none";
     selected_object.classList.remove('selectedobj');
     selected_object = editor;
@@ -191,61 +195,14 @@ editor.addEventListener("click", function (e) {
 
 if(adding_element == false){
 editor.addEventListener("click",function(e){
-    dragElement(selected_object)
+    dragElement(selected_object,selected_object,quadtree)
     //feature not complete
     //dragElement(bottom_right_grab)
+})}
 
 
-function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "header")) {
-    // if present, the header is where you move the DIV from:
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-  } else{
-    if(elmnt !== editor){
-    // otherwise, move the DIV from anywhere inside the DIV:
-    elmnt.onmousedown = dragMouseDown;
-    }
-  }
 
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
-  }
-
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-    selector.style.top = (elmnt.offsetTop - pos2 -10) + "px";
-    selector.style.left = (elmnt.offsetLeft - pos1 -10) + "px";
-    //feuture not complete
-    //bottom_right_grab.style.top = (elmnt.offsetTop - pos2 +selected_object.getBoundingClientRect().height - 10) + "px"
-    //bottom_right_grab.style.left = (elmnt.offsetLeft - pos2 +selected_object.getBoundingClientRect().width - 10) + "px"
-    //bottomright_drag_dimensions()
-  }
-
-  function closeDragElement() {
-    // stop moving when mouse button is released:
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
-}})}
-
-//function bottomright_drag_dimensions(){
+//export function bottomright_drag_dimensions(){
 //  selected_object.style.width = bottom_right_grab.getClientRects().x +"px"
 //  selected_object.style.height = bottom_right_grab.getClientRects().y + "px"
 //
@@ -262,64 +219,36 @@ document.getElementById("menu").addEventListener("click",function(){
 })
 
 
-
-//properties
-function update_props(){
-  ID_inducator.value = selected_object.id
-  background_color.value = rgbToHex(window.getComputedStyle(selected_object).backgroundColor)
-  position_ind.value = selected_object.style.position
-  width_ind.value = selected_object.style.width
-  height_ind.value = selected_object.style.height
-  top_ind.value = selected_object.style.top
-  left_ind.value = selected_object.style.left
-  margin_all_ind.value = selected_object.style.margin
-  padding_all_ind.value = selected_object.style.padding
-  //text only feutures
-  if(selected_object && txt_eligable_tags.includes(selected_object.tagName.toLowerCase())){
-    font_size_ind.value = window.getComputedStyle(selected_object).fontSize
-    text_color_text_ind.value = window.getComputedStyle(selected_object).color
-    text_color_ind.value = rgbToHex(window.getComputedStyle(selected_object).color)
-    font_family_ind.value = window.getComputedStyle(selected_object).fontFamily
-    text_decoration_ind.value = window.getComputedStyle(selected_object).textDecoration
-    font_weight_ind.value = window.getComputedStyle(selected_object).fontWeight
-    text_align_ind.value = window.getComputedStyle(selected_object).textAlign
-
-  }else{
-    //todo: Disable each of these elements if selectedobj is not text type
-    console.log("todo: code(4)")
-  }
-}
-
-
-function change(what){
-  if(what === "id"){selected_object.id = ID_inducator.value}
-  if(what === "background_color"){selected_object.style.background = background_color.value}
-  if(what === "width"){selected_object.style.width = width_ind.value}
-  if(what === "height"){selected_object.style.height = height_ind.value}
-  if(what === "top"){selected_object.style.top = top_ind.value}
-  if(what === "left"){selected_object.style.left = left_ind.value}
-  if(what === "margin_all"){selected_object.style.margin = margin_all_ind.value}
-  if(what === "padding_all"){selected_object.style.padding = padding_all_ind.value}
-  if(what === "font_size"){selected_object.style.fontSize = font_size_ind.value}
-  if(what === "text_color"){selected_object.style.color = text_color_ind.value}
-  if(what === "text_color_text"){selected_object.style.color = text_color_text_ind.value}
-  if(what === "font_family"){selected_object.style.fontFamily = font_family_ind.value}
-  if(what === "text_decor"){selected_object.style.textDecoration = text_decoration_ind.value}
-  if(what === "font_weight"){selected_object.style.fontWeight = font_weight_ind.value}
-  if(what === "text_align"){selected_object.style.textAlign = text_align_ind.value}
+export function change(what){
+  if(what === "id"){selected_object.id = inducators.ID_inducator.value}
+  if(what === "background_color"){selected_object.style.background = inducators.background_color.value}
+  if(what === "width"){selected_object.style.width = inducators.width_ind.value}
+  if(what === "height"){selected_object.style.height = inducators.height_ind.value}
+  if(what === "top"){selected_object.style.top = inducators.top_ind.value}
+  if(what === "left"){selected_object.style.left = inducators.left_ind.value}
+  if(what === "margin_all"){selected_object.style.margin = inducators.margin_all_ind.value}
+  if(what === "padding_all"){selected_object.style.padding = inducators.padding_all_ind.value}
+  if(what === "font_size"){selected_object.style.fontSize = inducators.font_size_ind.value}
+  if(what === "text_color"){selected_object.style.color = inducators.text_color_ind.value}
+  if(what === "text_color_text"){selected_object.style.color = inducators.text_color_text_ind.value}
+  if(what === "font_family"){selected_object.style.fontFamily = inducators.font_family_ind.value}
+  if(what === "text_decor"){selected_object.style.textDecoration = inducators.text_decoration_ind.value}
+  if(what === "font_weight"){selected_object.style.fontWeight = inducators.font_weight_ind.value}
+  if(what === "text_align"){selected_object.style.textAlign = inducators.text_align_ind.value}
   if(what === "content"){selected_object.innerText = content.innerText}
 }
 
-//function to encode rgb into hex
-function rgbToHex(rgb) {
-  let a = rgb.split("(")[1].split(")")[0];
-  a = a.split(",");
-  let b = a.map(function(x){
-      x = parseInt(x).toString(16);
-      return (x.length==1) ? "0"+x : x;
-  });
-  return "#" + b.join("");
-}
+//export function to encode rgb into hex
+//moved: color-manager.js
+//export function rgbToHex(rgb) {
+//  let a = rgb.split("(")[1].split(")")[0];
+//  a = a.split(",");
+//  let b = a.map(export function(x){
+//      x = parseInt(x).toString(16);
+//      return (x.length==1) ? "0"+x : x;
+//  });
+//  return "#" + b.join("");
+//}
 
 //implement shortcut detection here using key codes
 document.addEventListener("keydown",function(e){
@@ -331,14 +260,8 @@ document.addEventListener("keydown",function(e){
   }
 })
 
-//all functions to open prompts will be put inside here with varying the prompt parameter
-function open_prompt(prompt){
-  if(prompt === "create"){document.getElementById("create_pr_prompt").style.display = "block"}
-}
-function close_prompt(prompt){
-  if(prompt === "create"){document.getElementById("create_pr_prompt").style.display = "none"}
-}
-document.getElementById("projects_list").addEventListener("click",function(e){
-  console.log(`project ${e.target} clicked!!`)
-  document.getElementById("projects").style.display = "none"
-})
+
+
+
+
+

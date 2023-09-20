@@ -1,0 +1,28 @@
+{
+  "name": "@timohausmann/quadtree-js",
+  "version": "1.2.5",
+  "description": "Another quadtree implementation for javascript",
+  "author": "Timo Hausmann",
+  "license": "MIT",
+  "main": "quadtree.js",
+  "types": "quadtree.d.ts",
+  "scripts": {
+    "build": "uglifyjs quadtree.js -o quadtree.min.js --compress --mangle --comments /github/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/timohausmann/quadtree-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/timohausmann/quadtree-js/issues"
+  },
+  "keywords": [
+    "quadtree"
+  ],
+  "directories": {
+    "example": "examples"
+  },
+  "devDependencies": {
+    "uglify-js": "^3.9.4"
+  }
+}
