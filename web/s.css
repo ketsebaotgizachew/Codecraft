@@ -55,34 +55,86 @@ body {
   /* hidden by defult*/
   display: none;
   border-radius: 8px;
-  transition: 2s ease-out;
+  transition: 0.3s ease-out;
 }
 .rightclick button {
   width: 100%;
+  margin-top: 5px;
+  text-align: start;
   border: none;
-  background-color: rgb(15, 15, 15);
+  background-color: transparent;
   color: white;
-  font-family: monospace;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   height: 40px;
+}
+.rightclick button span {
+  position: absolute;
+  background: #212121;
+  border: 1px solid #313131;
+  /* width: 90px; */
+  padding-inline: 10px;
+  border-radius: 4px;
+  height: 20px;
+  margin-left: -2px;
+  align-self: end;
+  justify-content: end;
+  right: 10px;
 }
 .rightclick button:hover {
   background-color: rgb(31, 31, 31);
 }
 
-.menu {
+.bottom_nav {
   position: absolute;
   bottom: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 25px;
+  /* border-radius: 10px 0px 0px 10px; */
+  background-color: rgb(17, 19, 20);
+  border: 1px solid rgb(41, 41, 41);
+}
+.bottom_nav button {
+  cursor: pointer;
+  border: none;
+  margin-top: -1px;
+  width: 70px;
+  height: 28px;
+  margin-inline: 0px;
+  background-color: rgba(128, 128, 128, 0);
+  font-family: system-ui;
+  font-size: 15px;
+  color: rgb(169, 169, 169);
+}
+.bottom_nav button:hover {
+  background-color: rgb(115, 8, 255);
+}
+
+.menu {
+  position: absolute;
+  bottom: 25px;
   right: 0px;
   width: 30px;
   height: 30px;
-  border-radius: 10px 0px 0px 10px;
+  /*border-radius: 10px 0px 0px 10px;*/
   background-color: rgb(17, 17, 17);
   border: 1px solid rgb(41, 41, 41);
+}
+
+.add_title {
+  position: fixed;
+  margin-top: -25px;
+  margin-left: 15px;
+  font-family: monospace;
+  color: white;
+  font-size: 19px;
 }
 
 .props_tit {
   position: fixed;
   color: rgb(253, 253, 253);
+  font-family: monospace;
+  font-size: 19px;
   margin-top: -24px;
 }
 
@@ -91,7 +143,7 @@ body {
   top: 0px;
   right: 0px;
   width: 300px;
-  height: 100vh;
+  height: 92vh;
   padding-right: 16px;
   background-color: rgb(20, 20, 20);
   padding-left: 15px;
@@ -197,15 +249,33 @@ body {
 .addmenu button {
   color: white;
   width: 95%;
-  height: 35px;
-  background-color: rgb(43, 43, 43);
+  text-align: start;
+  height: 40px;
+  background-color: transparent;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   border: none;
   margin-top: 5px;
   margin-left: 8px;
   font-size: 18px;
+  border: 1px solid rgb(51, 51, 51);
+}
+.addmenu button span {
+  position: absolute;
+  background: #212121;
+  border: 1px solid #313131;
+  /* width: 90px; */
+  padding-inline: 10px;
+  margin-top: -2px;
+  border-radius: 4px;
+  height: 25px;
+  margin-left: -2px;
+  align-self: end;
+  justify-content: end;
+  font-size: 16px;
+  right: 10px;
 }
 .addmenu button:hover {
-  background-color: rgb(68, 68, 68);
+  background-color: rgb(31, 31, 31);
 }
 
 .projects {
@@ -244,6 +314,12 @@ body {
   border-radius: 4px;
   color: rgb(115, 8, 255);
 }
+.project_navs input:hover {
+  background-color: rgb(41, 41, 41);
+}
+.project_navs input:focus {
+  outline: 1px solid rgb(148, 66, 255);
+}
 .project_navs button {
   margin-top: 15px;
   margin-left: 5px;
@@ -258,6 +334,197 @@ body {
   background-color: rgb(63, 63, 63);
 }
 
+.file_menus {
+  position: absolute;
+  height: 550px;
+  width: 300px;
+  left: 10px;
+  bottom: 35px;
+  background-color: rgb(15, 15, 15);
+  border-radius: 4px;
+  border: 1px solid rgb(73, 73, 73);
+  display: none;
+  flex-direction: column-reverse;
+}
+.file_menus button {
+  text-align: start;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  border: none;
+  background-color: rgb(15, 15, 15);
+  color: white;
+  height: 40px;
+}
+.file_menus button:hover {
+  background-color: rgb(31, 31, 31);
+}
+.file_menus button span {
+  position: absolute;
+  background: #212121;
+  border: 1px solid #313131;
+  /* width: 90px; */
+  padding-inline: 10px;
+  border-radius: 4px;
+  height: 20px;
+  margin-left: -2px;
+  align-self: end;
+  justify-content: end;
+  right: 10px;
+}
+
+.edit_menu {
+  position: absolute;
+  height: 550px;
+  width: 300px;
+  left: 80px;
+  bottom: 35px;
+  background-color: rgb(15, 15, 15);
+  border-radius: 4px;
+  border: 1px solid rgb(73, 73, 73);
+  display: none;
+  flex-direction: column-reverse;
+}
+.edit_menu button {
+  text-align: start;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  border: none;
+  background-color: rgb(15, 15, 15);
+  color: white;
+  height: 40px;
+}
+.edit_menu button:hover {
+  background-color: rgb(31, 31, 31);
+}
+.edit_menu button span {
+  position: absolute;
+  background: #212121;
+  border: 1px solid #313131;
+  /* width: 90px; */
+  padding-inline: 10px;
+  border-radius: 4px;
+  height: 20px;
+  margin-left: -2px;
+  align-self: end;
+  justify-content: end;
+  right: 10px;
+}
+
+.view_menu {
+  position: absolute;
+  height: 550px;
+  width: 300px;
+  left: 150px;
+  bottom: 35px;
+  background-color: rgb(15, 15, 15);
+  border-radius: 4px;
+  border: 1px solid rgb(73, 73, 73);
+  display: none;
+  flex-direction: column-reverse;
+}
+.view_menu button {
+  text-align: start;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  border: none;
+  background-color: rgb(15, 15, 15);
+  color: white;
+  height: 40px;
+}
+.view_menu button:hover {
+  background-color: rgb(31, 31, 31);
+}
+.view_menu button span {
+  position: absolute;
+  background: #212121;
+  border: 1px solid #313131;
+  /* width: 90px; */
+  padding-inline: 10px;
+  border-radius: 4px;
+  height: 20px;
+  margin-left: -2px;
+  align-self: end;
+  justify-content: end;
+  right: 10px;
+}
+
+.window_menu {
+  position: absolute;
+  height: 400px;
+  width: 300px;
+  left: 210px;
+  bottom: 35px;
+  background-color: rgb(15, 15, 15);
+  border-radius: 4px;
+  border: 1px solid rgb(73, 73, 73);
+  display: none;
+  flex-direction: column-reverse;
+}
+.window_menu button {
+  text-align: start;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  border: none;
+  background-color: rgb(15, 15, 15);
+  color: white;
+  height: 40px;
+}
+.window_menu button:hover {
+  background-color: rgb(31, 31, 31);
+}
+.window_menu button span {
+  position: absolute;
+  background: #212121;
+  border: 1px solid #313131;
+  /* width: 90px; */
+  padding-inline: 10px;
+  border-radius: 4px;
+  height: 20px;
+  margin-left: -2px;
+  align-self: end;
+  justify-content: end;
+  right: 10px;
+}
+
+.help_menu {
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  left: 280px;
+  bottom: 35px;
+  background-color: rgb(15, 15, 15);
+  border-radius: 4px;
+  border: 1px solid rgb(73, 73, 73);
+  display: none;
+  flex-direction: column-reverse;
+}
+.help_menu button {
+  text-align: start;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  border: none;
+  background-color: rgb(15, 15, 15);
+  color: white;
+  height: 40px;
+}
+.help_menu button:hover {
+  background-color: rgb(31, 31, 31);
+}
+.help_menu button span {
+  position: absolute;
+  background: #212121;
+  border: 1px solid #313131;
+  /* width: 90px; */
+  padding-inline: 10px;
+  border-radius: 4px;
+  height: 20px;
+  margin-left: -2px;
+  align-self: end;
+  justify-content: end;
+  right: 10px;
+}
+
+.projects_list {
+  overflow-y: scroll;
+  height: 87vh;
+  width: 99vw;
+  margin-top: 15px;
+}
 .projects_list div:hover {
   background-color: rgb(34, 34, 34);
 }

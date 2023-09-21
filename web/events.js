@@ -5,6 +5,9 @@ import { add_resisers,remove_resisers } from "./resizers.js";
 import { update_properties } from "./property-manager.js";
 import { dragElement } from "./editor-drag-handler.js";
 
+//if design mode is off elements will not be editable
+let design_mode = true
+
 //default colors for editor
 let default_div_color = "blue";
 let default_div_border_color = "black";
@@ -70,7 +73,7 @@ editor.addEventListener("contextmenu", function (e) {
   //move rightclick menu to position before displaying
   rightclickmenu.style.top = e.clientY + "px";
   rightclickmenu.style.left = e.clientX + "px";
-  rightclickmenu.style.height = "300px"
+  rightclickmenu.style.height = "505px"
 
   //display rightclick menu
   rightclickmenu.style.display = "block";
@@ -169,6 +172,35 @@ export function add_menu_open(){
   document.getElementById("addmenu").style.display = "block"
 }
 
+editor.addEventListener("dblclick", function (e) {
+  if (e.target && e.target !== editor) {
+
+    //bottom right grabber feature not complete
+    //bottom_right_grab.style.display = "block"
+    //bottom_right_grab.style.top = selected_object.getBoundingClientRect().y + selected_object.getBoundingClientRect().height - 10 +"px"
+    //bottom_right_grab.style.left = selected_object.getBoundingClientRect().x + selected_object.getBoundingClientRect().width - 10 +"px"
+    
+    selected_object.width = selected_object.getBoundingClientRect().x - bottom_right_grab.getBoundingClientRect().x + "px"
+    selected_object.classList.remove('selectedobj');
+    remove_resisers(selected_object)
+    selected_object = null;
+    selected_object = e.target;
+    selected_object.focus()
+    bottom_right_grab = add_resisers(selected_object)
+    dragElement(bottom_right_grab,selector,quadtree)
+    selected_object.classList.add('selectedobj');
+    update_properties(identify,selected_object,rgbToHex)
+  } else {
+    rightclickmenu.style.visibility = "hidden"
+    rightclickmenu.style.height = "0px"
+    rightclickmenu.style.display = "none"
+    remove_resisers(selected_object)
+    selected_object.style.border = "none";
+    selected_object.classList.remove('selectedobj');
+    selected_object = editor;
+  }
+});
+
 editor.addEventListener("click", function (e) {
   if (e.target && e.target !== editor) {
 
@@ -239,7 +271,8 @@ export function change(what){
   if(what === "text_decor"){selected_object.style.textDecoration = identify.text_decoration_ind.value}
   if(what === "font_weight"){selected_object.style.fontWeight = identify.font_weight_ind.value}
   if(what === "text_align"){selected_object.style.textAlign = identify.text_align_ind.value}
-  if(what === "content"){selected_object.innerText = content.innerText}
+  if(what === "content"){selected_object.textContent = identify.content.value}
+  //if(what === "type"){selector.nodeType = }
 }
 
 //export function to encode rgb into hex
@@ -263,6 +296,88 @@ document.addEventListener("keydown",function(e){
     console.log(editor.innerHTML)
   }
 })
+
+let file_menu_open = false;
+let edit_menu_open = false;
+let view_menu_open = false;
+let window_menu_open = false;
+let help_menu_open = false;
+
+export function open_nav_menu(nav_item){
+  if(nav_item === "file"){
+    document.getElementById("edit_menu").style.display = "none";
+    document.getElementById("view_menu").style.display = "none";
+    document.getElementById("window_menu").style.display = "none";
+    document.getElementById("help_menu").style.display = "none";
+    edit_menu_open = view_menu_open = window_menu_open = help_menu_open = false;
+
+    if(file_menu_open === false){
+      document.getElementById("file_menus").style.display = "flex";
+      file_menu_open = true;
+    } else {
+      document.getElementById("file_menus").style.display = "none";
+      file_menu_open = false;
+    }
+  } else if(nav_item === "edit"){
+    document.getElementById("file_menus").style.display = "none";
+    document.getElementById("view_menu").style.display = "none";
+    document.getElementById("window_menu").style.display = "none";
+    document.getElementById("help_menu").style.display = "none";
+    file_menu_open = view_menu_open = window_menu_open = help_menu_open = false;
+
+    if(edit_menu_open === false){
+      document.getElementById("edit_menu").style.display = "flex";
+      edit_menu_open = true;
+    } else {
+      document.getElementById("edit_menu").style.display = "none";
+      edit_menu_open = false;
+    }
+  } else if(nav_item === "view"){
+    document.getElementById("file_menus").style.display = "none";
+    document.getElementById("edit_menu").style.display = "none";
+    document.getElementById("window_menu").style.display = "none";
+    document.getElementById("help_menu").style.display = "none";
+    file_menu_open = edit_menu_open = window_menu_open = help_menu_open = false;
+
+    if(view_menu_open === false){
+      document.getElementById("view_menu").style.display = "flex";
+      view_menu_open = true;
+    } else {
+      document.getElementById("view_menu").style.display = "none";
+      view_menu_open = false;
+    }
+  } else if(nav_item === "window"){
+    document.getElementById("file_menus").style.display = "none";
+    document.getElementById("edit_menu").style.display = "none";
+    document.getElementById("view_menu").style.display = "none";
+    document.getElementById("help_menu").style.display = "none";
+    file_menu_open = edit_menu_open = view_menu_open = help_menu_open = false;
+
+    if(window_menu_open === false){
+      document.getElementById("window_menu").style.display = "flex";
+      window_menu_open = true;
+    } else {
+      document.getElementById("window_menu").style.display = "none";
+      window_menu_open= false;
+    }
+  } else if(nav_item === "help"){
+    document.getElementById("file_menus").style.display= "none";
+    document.getElementById("edit_menu").style.display= "none";
+    document.getElementById("view_menu").style.display= "none";
+    document.getElementById("window_menu").style.display= "none";
+    
+     file_menu_open= edit_menu_open= view_menu_open= window_menu_open= false;
+
+     if(help_menu_open===false){
+         document.getElementById('help_menu').style.display="flex"
+         help_menu_open=true
+     }else{
+         document.getElementById('help_menu').style.display="none"
+         help_menu_open=false
+     }
+  }
+}
+
 
 
 

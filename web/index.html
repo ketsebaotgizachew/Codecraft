@@ -17,24 +17,31 @@
 
         <!--Addable elements-->
         <div class="addmenu" id="addmenu">
-            <button onclick="main.call_add('div')">Div</button>
-            <button onclick="main.call_add('input')">input</button>
-            <button onclick="main.call_add('h1')">H1 to H6</button>
-            <button onclick="main.call_add('textarea')">TextArea</button>
-            <button onclick="main.call_add('button')">Button</button>
-            <button onclick="main.call_add('area')">Area</button>
-            <button onclick="main.call_add('canvas')">Canvas</button>
-            <button onclick="main.call_add('img')">Img</button>
-            <button onclick="main.call_add('a')">link</button>
-            <button onclick="main.call_add('select')">selector</button>
-            <button onclick="main.call_add('option')">options</button>
-            <button onclick="main.call_add('source')">source</button>
-            <button onclick="main.call_add('span')">span</button>
-            <button onclick="main.call_add('svg')">svg</button>
-            <button onclick="main.call_add('video')">video</button>
-            <button onclick="main.call_add('object')">object</button>
-            <button onclick="main.call_add('nav')">nav</button>
-            <button onclick="main.call_add('canvas')">canvas</button>
+            <p class="add_title">Select and ADD</p>
+            <button onclick="main.call_add('div')">Division <span>(Ctrl+A+D)</span></button>
+            <button onclick="main.call_add('button')">Button <span>CTRL+A+B</span></button>
+            <button onclick="main.call_add('input')">Input <span>CTRL+A+I</span></button>
+            <button onclick="main.call_add('p')">Paragraph <span>(Ctrl+A+P)</span></button>
+            <button onclick="main.call_add('span')">Span <span>(Ctrl+A+S)</span></button>
+            <button onclick="main.call_add('h1')">Heading 1 <span>(Ctrl+A+H)</span></button>
+            <button onclick="main.call_add('h2')">Heading 2 <span>(Ctrl+A+H)</span></button>
+            <button onclick="main.call_add('h3')">Heading 3 <span>(Ctrl+A+H)</span></button>
+            <button onclick="main.call_add('h4')">Heading 4 <span>(Ctrl+A+H)</span></button>
+            <button onclick="main.call_add('h5')">Heading 5 <span>(Ctrl+A+H)</span></button>
+            <button onclick="main.call_add('h6')">Heading 6 <span>(Ctrl+A+H)</span></button>
+            <button onclick="main.call_add('a')">a <span>(Ctrl+A+A)</span></button>
+            <button onclick="main.call_add('img')">Image <span>(Ctrl+A+I)</span></button>
+            <button onclick="main.call_add('ul')">Unordered List <span>(Ctrl+A+U)</span></button>
+            <button onclick="main.call_add('li')">List Item <span>(Ctrl+A+L)</span></button>
+            <button onclick="main.call_add('ol')">Ordered List <span>(Ctrl+A+O)</span></button>
+            <button onclick="main.call_add('canvas')">Canvas <span>(Ctrl+A+C)</span></button>
+            <button onclick="main.call_add('video')">Video <span>(Ctrl+A+V)</span></button>
+            <button onclick="main.call_add('audio')">Audio <span>(Ctrl+A+A)</span></button>
+            <button onclick="main.call_add('code')">Code <span>(Ctrl+A+C)</span></button>
+            <button onclick="main.call_add('select')">Selectors <span>(Ctrl+A+S)</span></button>
+            <div class="scroll_max"></div>
+<!-- More buttons can be added here -->
+
         </div>
 
         <!--js code editor window-->
@@ -52,11 +59,96 @@
             </div>
         </div>
 
-
+        <div class="bottom_nav">
+            <button onclick="main.open_nav_menu('file')">File</button>
+            <button onclick="main.open_nav_menu('edit')">Edit</button>
+            <button onclick="main.open_nav_menu('view')">View</button>
+            <button onclick="main.open_nav_menu('window')">Window</button>
+            <button onclick="main.open_nav_menu('help')">Help</button>
+        </div>
+        <div class="file_menus" id="file_menus">
+            <button>New Project <span>(Ctrl+N)</span></button>
+            <button>Open Project <span>(Ctrl+O)</span></button>
+            <button>Save Project <span>(Ctrl+S)</span></button>
+            <button>Save Project As... <span>(Ctrl+Shift+S)</span></button>
+            <button>Close Project <span>(Ctrl+W)</span></button>
+            <button>Export Project <span>(Ctrl+E)</span></button>
+            <button>Import Project <span>(Ctrl+I)</span></button>
+            <button>Print Preview <span>(Ctrl+P)</span></button>
+            <button>Page Setup... <span></span></button>
+            <button>Print... <span>(Ctrl+Shift+P)</span></button>
+            <button>Exit <span>(Alt+F4)</span></button>
+            <button>Switch to Code View <span>(Ctrl+Shift+C)</span></button>
+            <button>Switch to Design View <span>(Ctrl+Shift+D)</span></button>
+            <button>Preferences... <span>(Ctrl+,)</span></button>
+        </div>
+        <div class="edit_menu" id="edit_menu">
+            <button>Undo <span>(Ctrl+Z)</span></button>
+            <button>Redo <span>(Ctrl+Y)</span></button>
+            <button>Cut Element <span>(Ctrl+X)</span></button>
+            <button>Copy Element <span>(Ctrl+C)</span></button>
+            <button>Paste Element <span>(Ctrl+V)</span></button>
+            <button>Delete Element <span>(Del)</span></button>
+            <button>Duplicate Element <span>(Ctrl+D)</span></button>
+            <button>Select Parent/Child <span>(Alt+Arrow keys)</span></button>
+            <button>Move Forward/Backward <span>(Shift+Arrow keys)</span></button>
+            <button>Group/Ungroup Elements <span>(Ctrl+G/U)</span></button>
+            <button>Lock/Unlock Element <span>(Ctrl+L)</span></button>
+            <button>Show/Hide Element <span>(Ctrl+H)</span></button>
+            <button>Align Elements <span>(Ctrl+A)</span></button>
+            <button>Distribute Elements <span>(Ctrl+B)</span></button>
+        </div>
+        <div class="view_menu" id="view_menu">
+            <button>Zoom In <span>(Ctrl+Plus)</span></button>
+            <button>Zoom Out <span>(Ctrl+Minus)</span></button>
+            <button>Reset Zoom <span>(Ctrl+0)</span></button>
+            <button>Toggle Full Screen <span>(F11)</span></button>
+            <button>Show/Hide Rulers <span>(Ctrl+R)</span></button>
+            <button>Show/Hide Grid <span>(Ctrl+G)</span></button>
+            <button>Show/Hide Guides <span>(Ctrl+H)</span></button>
+            <button>Lock/Unlock Guides <span>(Ctrl+L)</span></button>
+            <button>Snap to Grid/Guides <span>(Ctrl+Shift+G)</span></button>
+            <button>Switch to Code View <span>(Ctrl+Shift+C)</span></button>
+            <button>Switch to Design View <span>(Ctrl+Shift+D)</span></button>
+            <button>Preview in Browser <span>(Ctrl+P)</span></button>
+            <button>Show/Hide Element Outlines <span>(Ctrl+E)</span></button>
+            <button>Show/Hide Hidden Elements <span>(Ctrl+Shift+H)</span></button>
+        </div>
+        <div class="window_menu" id="window_menu">
+            <button>New Window <span>(Ctrl+Shift+N)</span></button>
+            <button>Close Window <span>(Ctrl+Shift+W)</span></button>
+            <button>Minimize <span>(Ctrl+M)</span></button>
+            <button>Zoom <span>(Ctrl+Z)</span></button>
+            <button>Bring All to Front <span>(Ctrl+Shift+F)</span></button>
+            <button>Show Previous Tab <span>(Ctrl+Shift+Tab)</span></button>
+            <button>Show Next Tab <span>(Ctrl+Tab)</span></button>
+            <button>Move Tab to New Window <span>(Ctrl+Shift+T)</span></button>
+            <button>Merge All Windows <span>(Ctrl+Shift+M)</span></button>
+            <button>Enter Full Screen <span>(F11)</span></button>
+        </div>
+        <div class="help_menu" id="help_menu">
+            <button>Search <span>(F1)</span></button>
+            <button>User Guide... <span></span></button>
+            <button>Tutorials... <span></span></button>
+            <button>Keyboard Shortcuts... <span>(Ctrl+K)</span></button>
+            <button>Report a Bug... <span></span></button>
+            <button>Check for Updates... <span></span></button>
+            <button>About codecraft... <span></span></button>
+            <button>Contact Support... <span></span></button>
+        </div>
         <!--right click add button-->
         <div class="rightclick" id="rightclick">
-            <button id="add" onclick="main.add_menu_open()">Add</button>
-            <button id="jscode" class="jscode">js codespace</button>
+            <button id="add" onclick="main.add_menu_open()">Add <span>CTRL+A</span></button>
+            <button>Edit Element <span>(Ctrl+E)</span></button>
+            <button>Cut Element <span>(Ctrl+X)</span></button>
+            <button>Copy Element <span>(Ctrl+C)</span></button>
+            <button>Paste Element <span>(Ctrl+V)</span></button>
+            <button>Delete Element <span>(Del)</span></button>
+            <button>Duplicate Element <span>(Ctrl+D)</span></button>
+            <button>Inspect Element <span>(Ctrl+Shift+I)</span></button>
+            <button>Bring to Front <span>(Ctrl+Shift+Up)</span></button>
+            <button>Send to Back <span>(Ctrl+Shift+Down)</span></button>
+            <button>Lock/Unlock Element <span>(Ctrl+L)</span></button>
         </div>
         <!--Add Menu For the addable elements-->
         <div class="menu" id="menu"></div>
@@ -71,7 +163,7 @@
             <input type="text" id="position" placeholder="default-absolute">
             
             <h1>display</h1>
-            <input type="text" placeholder="default-block">
+            <input type="text" placeholder="default-block" id="display">
 
             <h1>Background-color</h1>
             <input type="color" id="background_color" oninput="main.change('background_color')" />
@@ -104,7 +196,7 @@
 
             <div class="text_only">
                 <h1>Text properties</h1>
-                <input type="text" placeholder="type">
+                <input type="text" placeholder="type" id="type_ind" onchange="main.change('type')">
                 <input type="text" placeholder="content" id="content" oninput="main.change('content')">
                 <input type="text" placeholder="font size" id="font_size" onchange="main.change('font_size')">
                 <div class="color_selector">
@@ -119,26 +211,25 @@
 
             <div class="img_props">
                 <h1>Image Properties</h1>
-                <input type="text" placeholder="img-url" id="img_url">
+                <input type="text" placeholder="img-url" id="img_url" onchange="change('img_url')">
                 <input type="text" placeholder="image-repeat" id="image_repeat">
                 <input type="text" placeholder="img-size">
             </div>
 
             <div class="others">
                 <h1>others</h1>
-                <input type="text" placeholder="border" id="border">
-                <input type="text" placeholder="border-radius">
-                <input type="text" placeholder="backdrop">
-                <input type="text" placeholder="opacity">
-                <input type="text" placeholder="visiblity">
-                <input type="text" placeholder="box-shadow" id="box_shadow">
-                <input type="text" placeholder="z-index" id="Z_index">
-                <input type="text" placeholder="display" id="display">
-                <input type="text" placeholder="overflow-x" id="overflow_x">
-                <input type="text" placeholder="overflow-y" id="overflow_y">
-                <input type="text" placeholder="justify-content">
-                <input type="text" placeholder="align-self">
-                <input type="text" placeholder="align-content">
+                <input type="text" placeholder="border" id="border" onchange="change('border')">
+                <input type="text" placeholder="border-radius" id="border_radius"     onchange="change('border_radius')">
+                <input type="text" placeholder="backdrop" id="backdrop"   onchange="change('backdrop')">
+                <input type="text" placeholder="opacity" id="opacity"   onchange="change('opacity')">
+                <input type="text" placeholder="visiblity" id="visiblity" onchange="change('visiblity')">
+                <input type="text" placeholder="box-shadow" id="box_shadow" onchange="change('box-shadow')">
+                <input type="text" placeholder="z-index" id="Z_index" onchange="change('z-index')">
+                <input type="text" placeholder="overflow-x" id="overflow_x" onchange="change('overflowx')">
+                <input type="text" placeholder="overflow-y" id="overflow_y" onchange="change('overflowy')">
+                <input type="text" placeholder="justify-content" id="justify_content"   onchange="change('justify-content')">
+                <input type="text" placeholder="align-self" id="align_self"    onchange="change('align-self')">
+                <input type="text" placeholder="align-content" id="align_content" onchange="change('align-content')">
             </div>
 
             <!--to keep the last property elements from cliping when the scroll ends-->

@@ -19,6 +19,20 @@ export let identify = {
     text_decoration_ind:  document.getElementById("text_decoration"),
     font_weight_ind:  document.getElementById("font_weight"),
     text_align_ind:  document.getElementById("text_align"),
-    content:  document.getElementById("content")
+    content:  document.getElementById("content"),
+    
+    border: document.getElementById("border"),
+    border_radius: document.getElementById("border_radius"),
+    backdrop: document.getElementById("backdrop"),
+    opacity: document.getElementById("opacity"),
+    visiblity: document.getElementById("visiblity"),
+    box_shadow: document.getElementById("box_shadow"),
+    z_index: document.getElementById("z_index"),
+    overflowx: document.getElementById("overflow_x"),
+    overflowy: document.getElementById("overflow_y"),
+    justify_content: document.getElementById("justify_content"),
+    align_self: document.getElementById("algin_self"),
+    align_content: document.getElementById("align_content"),
+    display: document.getElementById("display")
 }
 
