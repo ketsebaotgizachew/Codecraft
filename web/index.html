@@ -7,6 +7,8 @@
         <link rel="stylesheet" href="s.css" />
         <link rel="stylesheet" href="./js-window-css/jscode-window.css">
         <script src="./quadtree-js/quadtree.min.js"></script>
+        <script type="text/javascript" src="eel.js"></script>
+
     </head>
     <body>
         <!--Editor Body-->
@@ -40,7 +42,7 @@
             <button onclick="main.call_add('code')">Code <span>(Ctrl+A+C)</span></button>
             <button onclick="main.call_add('select')">Selectors <span>(Ctrl+A+S)</span></button>
             <div class="scroll_max"></div>
-<!-- More buttons can be added here -->
+            <!-- More buttons can be added here -->
 
         </div>
 
@@ -68,7 +70,7 @@
         </div>
         <div class="file_menus" id="file_menus">
             <button>New Project <span>(Ctrl+N)</span></button>
-            <button>Open Project <span>(Ctrl+O)</span></button>
+            <button onclick="main.open_project()">Open Project <span>(Ctrl+O)</span></button>
             <button>Save Project <span>(Ctrl+S)</span></button>
             <button>Save Project As... <span>(Ctrl+Shift+S)</span></button>
             <button>Close Project <span>(Ctrl+W)</span></button>
@@ -193,7 +195,7 @@
 
             </div>
 
-
+            <!--text only properties-->
             <div class="text_only">
                 <h1>Text properties</h1>
                 <input type="text" placeholder="type" id="type_ind" onchange="main.change('type')">
@@ -208,7 +210,7 @@
                 <input type="text" placeholder="font-weight" id="font_weight" onchange="main.change('font_weight')">
                 <input type="text" placeholder="text-align" id="text_align" onchange="main.change('text_align')">
             </div>
-
+            <!--image properties only-->
             <div class="img_props">
                 <h1>Image Properties</h1>
                 <input type="text" placeholder="img-url" id="img_url" onchange="change('img_url')">
@@ -265,12 +267,15 @@
                     <h2>project Name</h2>
                     <input type="text" placeholder="project name" id="project_name">
 
-                    <h2>project Something</h2>
-                    <input type="text" placeholder="Havent found the right thing to ask here 😂">
+                    <h2>Project folder</h2>
+                    <div class="project_folder">
+                        <input type="text" placeholder="open folder" id="working_dir">
+                        <button onclick="main.open_project_dir()">open folder</button>
+                    </div>
                 </div>
                 <div class="action_btns">
                     <button class="cancel_pr_cr" onclick="window_manager.close_prompt('create')">Cancel</button>
-                    <button class="create_pr">Create</button>
+                    <button class="create_pr" onclick="main.create_project()">Create</button>
                 </div>
             </div>
             <div class="settings">

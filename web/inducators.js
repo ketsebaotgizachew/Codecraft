@@ -1,4 +1,5 @@
 
+//exports every inducator from properties tab
 export let identify = {
     ID_inducator:  document.getElementById("ID_inducator"),
     background_color:  document.getElementById("background_color"),

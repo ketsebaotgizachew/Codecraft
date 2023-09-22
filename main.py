@@ -1,18 +1,39 @@
 import eel
+from web.propject_managers.handle_project_files_so import  save_files , open_files, list_Projects, init_project_dir , load_html
+#tikinter is needed to open file dealoges
+from tkinter import Tk
+from tkinter.filedialog import askdirectory
+
 
 eel.init("web")
 
-def write_config(project_name, num_pages):
-    with open('config.txt', 'w') as file:
-        file.write(f"Project Name: {project_name}\n")
-        file.write(f"Number of Pages: {num_pages}\n")
+@eel.expose
+def init_pr(projectdir,projectname):
+    init_project_dir(projectdir,projectname)
+@eel.expose
+def sv_file(project_name, project_data,project_dir):
+    save_files( project_name, project_data,project_dir)
 
-def read_config():
-    with open('config.txt', 'r') as file:
-        lines = file.readlines()
-        project_name = lines[0].split(': ')[1].strip()
-        num_pages = int(lines[1].split(': ')[1].strip())
+@eel.expose
+def op_file(project_name):
+    open_files(project_name)
 
-    return [(project_name, num_pages)]
+@eel.expose
+def op_file_save_dialoge():
+    return None
+
+@eel.expose
+def open_folder_dialoge():
+    root = Tk()
+    root.attributes('-topmost', True)  # Display the dialog in the foreground.
+    root.iconify()  # Hide the little window.
+    folder = askdirectory(title='...', parent=root)
+    root.destroy()  # Destroy the root window when folder selected.
+    return folder
+
+@eel.expose
+def l_html(project_dir):
+    result = load_html(project_dir)
+    return result
 
 eel.start("index.html")
