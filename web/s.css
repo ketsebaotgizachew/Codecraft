@@ -7,6 +7,7 @@ body {
 .editor {
   position: absolute;
   width: 100vw;
+  overflow-y: auto;
   height: 100vh;
   z-index: -5;
   background-color: white;
@@ -39,7 +40,7 @@ body {
   left: -25px;
   right: -25px;
   bottom: -25px;
-  border: 2px solid #202020;
+  border: 2px dashed #d000d7;
   border-radius: 4px;
 }
 
@@ -65,7 +66,7 @@ body {
   background-color: transparent;
   color: white;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  height: 40px;
+  height: 30px;
 }
 .rightclick button span {
   position: absolute;
@@ -90,9 +91,11 @@ body {
   left: 0px;
   width: 100vw;
   height: 25px;
+  display: flex;
   /* border-radius: 10px 0px 0px 10px; */
   background-color: rgb(17, 19, 20);
   border: 1px solid rgb(41, 41, 41);
+  z-index: 4;
 }
 .bottom_nav button {
   cursor: pointer;
@@ -627,4 +630,86 @@ body {
 }
 .project_props input:hover {
   border-color: rgb(82, 82, 82);
+}
+
+.notification {
+  width: 500px;
+  height: 200px;
+  position: absolute;
+  bottom: -235px;
+  border-radius: 3px;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: rgb(15, 15, 15);
+  border: 1px solid rgb(34, 34, 34);
+  opacity: 0;
+  transition: 0.2s ease-out;
+  z-index: 3;
+}
+.notification #ok_not {
+  height: 31px;
+  width: 91px;
+  background: #3f3f3f;
+  color: #ffffff;
+  border: 1px solid #575757;
+  border-radius: 4px;
+  margin-left: 3px;
+  margin-top: -51px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+}
+.notification #cancel_not {
+  height: 31px;
+  width: 91px;
+  background: #3f3f3f;
+  color: rgb(255, 255, 255);
+  border: 1px solid #575757;
+  border-radius: 4px;
+  margin-left: 292px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+}
+.notification .content {
+  height: 123px;
+  margin-top: 5px;
+  padding-left: 5%;
+  width: 95%;
+  background: transparent;
+  color: white;
+}
+.notification .header {
+  height: 41px;
+  margin-top: -21px;
+  width: 100.3%;
+  margin-left: -1px;
+  background: #7c00fd;
+  font-size: 15px;
+  display: flex;
+}
+.notification .header h1 {
+  margin-top: 10px;
+  margin-left: 18px;
+  color: white;
+  width: 401px;
+  text-wrap: nowrap;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.notification .header button {
+  margin-left: 50px;
+  height: 26px;
+  margin-top: 7px;
+  background: transparent;
+  border: none;
+  color: white;
+}
+
+.view_mode_t {
+  width: 83px;
+  height: 25px;
+  color: rgb(100, 100, 100);
+  font-size: 15px;
+  margin-top: 2px;
+  margin-left: 18px;
+  font-family: system-ui;
 }/*# sourceMappingURL=s.css.map */

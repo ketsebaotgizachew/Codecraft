@@ -1,118 +1,180 @@
-
 $light_black: rgb(12 12 12);
 $light_border: rgb(41 41 41);
 $line_color: rgb(12 12 12);
 $highlightend_color: rgb(32, 32, 32);
 /* Firefox */
 * {
-    scrollbar-width: thin;
-    scrollbar-color: #313131 #DFE9EB;
+  scrollbar-width: thin;
+  scrollbar-color: #313131 #dfe9eb;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  height: 14px;
+  width: 12px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 0px;
+  background-color: rgb(32, 32, 32);
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: rgb(32, 32, 32);
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: rgb(32, 32, 32);
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background-color: rgb(53, 53, 53);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(53, 53, 53);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: rgb(53, 53, 53);
+}
+.e_code{
+  position: absolute;
+  height: 22px;
+  width: 150px;
+  margin-top: 13px;
+  margin-left: 85vw;
+  background: #37eb00;
+  border: none;
+  color: white;
+  &:hover{
+    background: #60c700;
   }
-  
-  /* Chrome, Edge and Safari */
-  *::-webkit-scrollbar {
-    height: 14px;
-    width: 12px;
+}
+.c_code{
+  position: absolute;
+  height: 22px;
+  width: 150px;
+  margin-top: 13px;
+  margin-left: 5px;
+  background: #c01600;
+  border: none;
+  color: white;
+  &:hover{
+    background: #ff1e00;
   }
-  *::-webkit-scrollbar-track {
-    border-radius: 0px;
-    background-color: rgb(32, 32, 32);
-  }
-  
-  *::-webkit-scrollbar-track:hover {
-    background-color: rgb(32, 32, 32);
-  }
-  
-  *::-webkit-scrollbar-track:active {
-    background-color: rgb(32, 32, 32);
-  }
-  
-  *::-webkit-scrollbar-thumb {
-    border-radius: 0px;
-    background-color: rgb(53, 53, 53);
-  }
-  
-  *::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(53, 53, 53);
-  }
-  
-  *::-webkit-scrollbar-thumb:active {
-    background-color: rgb(53, 53, 53);
-  }
-  
-.jscode_window{
+}
+.jscode_window {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  display: none;
+  .lines_count {
     position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100vw;
-    height: 100vh;
-    background-color: black;
-    
-    
-    .lines_count{
-        position: absolute;
-        margin-top: 25px;
-        margin-left: 5px;
-        width: 70px;
-        height: 93%;
-        background-color: $light_black;
-        border: 1px solid $light_border;
-        div{
-            width: 100%;
-            height: 38px;
-            background-color: $highlightend_color;
-            h1{
-                margin-top: 0px;
-                width: 100%;
-                height: 100%;
-                text-align: center;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                align-content: center;
-                font-size: 15px;
-                color: rgb(192, 192, 192);
-                font-family: Arial, Helvetica, sans-serif;
-            }
-        }
+    margin-top: 35px;
+    margin-left: 5px;
+    width: 70px;
+    height: 90vh;
+    background-color: $light_black;
+    border: 1px solid $light_border;
+    div {
+      width: 100%;
+      height: 28px;
+      background-color: $highlightend_color;
+      h1 {
+        margin-top: 0px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        font-size: 15px;
+        color: rgb(192, 192, 192);
+        font-family: Arial, Helvetica, sans-serif;
+      }
     }
-    
-    .text_area{
-        overflow-y: scroll;
+  }
+
+  .text_area {
+    overflow-y: scroll;
+    width: 90vw;
+    height: 90vh;
+    margin-left: 80px;
+    margin-top: 35px;
+    background-color: transparent;
+    border: 1px solid $light_border;
+    pre {
+      position: absolute;
+      width: 98%;
+      height: 90vh;
+      z-index: 5;
+      background-color: transparent;
+      border: none;
+      resize: none;
+      outline: none;
+      color: white;
+      code {
+        font-family: arial;
+        padding: 0px;
         width: 90vw;
-        height: 93vh;
-        margin-left: 80px;
-        margin-top: 25px;
-        background-color: $light_black;
-        border: 1px solid $light_border;
-        .highlight{
-            position: absolute;
-            width: 90vw;
-            height: 38px;
-            z-index: 1;
-            border: none;
-            background-color: $highlightend_color;
+        margin-top: -29px;
+        font-size: 18px;
+        height: 90vh;
+        span {
+          font-size: 19px !important; /* Adjust as needed */
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important; /* Adjust as needed */
+
+          /* Spacing properties */
+          letter-spacing: 1px !important; /* Adjust as needed */
+          word-spacing: 2px !important; /* Adjust as needed */
+          line-height: 1.5 !important; /* Adjust as needed */
+
+          padding: 0;
         }
-        textarea{
-            position: absolute;
-            width: 98%;
-            height: 35px;
-            z-index: 5;
-            padding-left: 15px;
-            background-color: transparent;
-            line-height: 35px;
-            border: none;
-            resize: none;
-            outline: none;
-            color: white;
-            font-size: 19px;
-            font-family: Arial, Helvetica, sans-serif;
-            ::placeholder{
-                color: rgb(153, 153, 153);
-            }
-            &:focus{
-                outline: none;
-            }
-        }
+      }
     }
+    textarea {
+      position: absolute;
+      width: 90vw;
+      height: 89vh;
+      z-index: 5;
+      padding-left: 15px;
+      background-color: transparent;
+      line-height: 35px;
+      border: none;
+      resize: none;
+      outline: none;
+      color: transparent;
+      caret-color: white;
+      font-size: 19px;
+      font-family: Arial, Helvetica, sans-serif;
+      ::placeholder {
+        color: rgb(153, 153, 153);
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+    textarea,
+    code {
+      /* Font properties */
+      position: absolute;
+      font-size: 19px !important; /* Adjust as needed */
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Adjust as needed */
+
+      /* Spacing properties */
+      letter-spacing: 1px !important; /* Adjust as needed */
+      word-spacing: 2px !important; /* Adjust as needed */
+      line-height: 1.5 !important; /* Adjust as needed */
+
+      /* Other properties for better alignment */ 
+      padding-left: 15px !important;
+      box-sizing: border-box !important;
+    }
+  }
 }

@@ -4,6 +4,7 @@ import { Rectangle } from "./rect.js";
 import { add_resisers,remove_resisers } from "./resizers.js";
 import { update_properties } from "./property-manager.js";
 import { dragElement } from "./editor-drag-handler.js"; 
+import { shownotification } from "./codecraft_ext_api/notification.js";
 
 //let projects properties be here for now
 let projectName;
@@ -11,7 +12,7 @@ let projectPlace;
 let projectPages;
 
 //if design mode is off elements will not be editable
-let design_mode = true
+export let view_mode = false
 
 //default colors for editor
 let default_div_color = "blue";
@@ -79,7 +80,7 @@ editor.addEventListener("contextmenu", function (e) {
   rightclickmenu.style.top = e.clientY + "px";
   rightclickmenu.style.left = e.clientX + "px";
   //right click menu height
-  rightclickmenu.style.height = "505px"
+  rightclickmenu.style.height = "400px"
 
   //display rightclick menu
   rightclickmenu.style.display = "block";
@@ -207,7 +208,7 @@ export function add_menu_open(){
 
 //dbclick to also focus to element when done
 editor.addEventListener("dblclick", function (e) {
-  if (e.target && e.target !== editor) {
+  if (e.target && e.target !== editor && view_mode === false) {
 
     //bottom right grabber feature not complete
     //bottom_right_grab.style.display = "block"
@@ -215,7 +216,7 @@ editor.addEventListener("dblclick", function (e) {
     //bottom_right_grab.style.left = selected_object.getBoundingClientRect().x + selected_object.getBoundingClientRect().width - 10 +"px"
     
     //display selector
-    selected_object.width = selected_object.getBoundingClientRect().x - bottom_right_grab.getBoundingClientRect().x + "px"
+   // selected_object.width = selected_object.getBoundingClientRect().x - bottom_right_grab.getBoundingClientRect().x + "px"
     selected_object.classList.remove('selectedobj');
 
     //remove prexisring resisers if any
@@ -237,7 +238,7 @@ editor.addEventListener("dblclick", function (e) {
 
     //new elemnt cliked will up date every input in properties tab using this function
     update_properties(identify,selected_object,rgbToHex)
-  } else {
+  } else if(e.target && e.target === editor && view_mode === false){
     //only if editor is clicked
     rightclickmenu.style.visibility = "hidden"
     rightclickmenu.style.height = "0px"
@@ -246,18 +247,24 @@ editor.addEventListener("dblclick", function (e) {
     selected_object.style.border = "none";
     selected_object.classList.remove('selectedobj');
     selected_object = editor;
+  }else if(selected_object && e.target && e.target !== editor && view_mode === true){
+    selected_object = null;
+    remove_resisers(selected_object)
+    selected_object.style.border = "none"
+    e.target.focus()
+    e.target.active()
+    selected_object.classList.remove('selectedobj');
   }
 });
 
 editor.addEventListener("click", function (e) {
-  if (e.target && e.target !== editor) {
+  if (e.target && e.target !== editor && view_mode === false) {
 
     //bottom right grabber feature not complete
     //bottom_right_grab.style.display = "block"
     //bottom_right_grab.style.top = selected_object.getBoundingClientRect().y + selected_object.getBoundingClientRect().height - 10 +"px"
     //bottom_right_grab.style.left = selected_object.getBoundingClientRect().x + selected_object.getBoundingClientRect().width - 10 +"px"
-    
-    selected_object.width = selected_object.getBoundingClientRect().x - bottom_right_grab.getBoundingClientRect().x + "px"
+    //.width = selected_object.getBoundingClientRect().x - bottom_right_grab.getBoundingClientRect().x + "px"
     selected_object.classList.remove('selectedobj');
     remove_resisers(selected_object)
     selected_object = null;
@@ -338,6 +345,9 @@ document.addEventListener("keydown",function(e){
   if (event.ctrlKey && event.key === 's') {
     event.preventDefault();  // Prevents the browser's default save action
     save_project()
+  }
+  if(event.ctrlKey && event.key === 'o'){
+    open_project()
   }
 })
 
@@ -449,9 +459,9 @@ export function create_project(){
 export function save_project(){
   if(projectName && projectPlace){
     eel.sv_file(projectName, editor.innerHTML,projectPlace)
-    console.log("project Saved!!")
+    shownotification("project manager","project saved!!")
   }else{
-    console.log("you have no project create one")
+    shownotification("project manager","no project has been setup")
   }
   
 }
@@ -467,6 +477,22 @@ export async function open_project(){
     selected_object = e.target;
     dragElement(e.target)
   })
+  shownotification("project handler","project loaded succesfully from: " + new_pr_path)
 }
 
+export function js_code(){
+  document.getElementById("jscode_window").style.display = "block"
+}
+export function design_view(){
+  document.getElementById("jscode_window").style.display = "none"
+}
 
+export function excute_js(){
+  let code = document.getElementById("code_area").value
+  eval(code)
+}
+document.getElementById("view_mode").addEventListener("change",function(){
+  view_mode = document.getElementById("view_mode").checked;
+  
+  console.log(view_mode)
+})

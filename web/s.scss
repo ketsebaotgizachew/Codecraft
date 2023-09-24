@@ -1,647 +1,730 @@
-
 $Theme_color: rgb(43, 43, 43);
-$Theme_font:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$Theme_font: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 $dark_Button_Color: rgb(15, 15, 15);
 
-body{
-    background-color: rgb(17, 0, 90);
-    overflow: hidden;
-    margin: 0px;
+body {
+  background-color: rgb(17, 0, 90);
+  overflow: hidden;
+  margin: 0px;
 }
-.editor{
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    z-index: -5;
-    background-color: white;
-    input{
-        cursor: pointer;
-    }
-    
-    
-    .selectedbody{
-        position: absolute;
-        border: 2px solid black;
-        display: none;
-    }
-    .bottom_right{
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        z-index: 25;
-        border: 2px solid black;
-        display: none;
-        &:hover{
-            transition: 1s;
-            background-color: black;
-        }
-    }   
-}
+.editor {
+  position: absolute;
+  width: 100vw;
+  overflow-y: auto;
+  height: 100vh;
+  z-index: -5;
+  background-color: white;
+  input {
+    cursor: pointer;
+  }
 
-.selectedobj{
-    &::after{
-        content: "";
-        position: absolute;
-        top: -25px;
-        left: -25px;
-        right: -25px;
-        bottom: -25px;
-        border: 2px solid #202020;
-        border-radius: 4px;
-    }
-}
-.rightclick{
+  .selectedbody {
     position: absolute;
-    /*just if it dosent work unless this two are usless here*/
-    top: 0px;
-    left: 0px;
-    /* top and left */
-    width: 300px;
-    height: 0px;
-    background-color: black;
-    /* hidden by defult*/
+    border: 2px solid black;
     display: none;
-    border-radius: 8px;
-    transition: 0.3s ease-out;
-    button{
-        width: 100%;
-        margin-top: 5px;
-        text-align: start;
-        border: none;
-        background-color:transparent;
-        color: white;
-        
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        height: 40px;
-        span{
-            position: absolute;
-            background: #212121;
-            border: 1px solid #313131;
-            /* width: 90px; */
-            padding-inline: 10px;
-            border-radius: 4px;
-            height: 20px;
-            margin-left: -2px;
-            align-self: end;
-            justify-content: end;
-            right: 10px;
-        }
-        &:hover{
-            background-color: rgb(31, 31, 31);
-        }
-    }
-}
-.bottom_nav{
+  }
+  .bottom_right {
     position: absolute;
-    bottom: 0px;
-    left: 0px;
-    width: 100vw;
-    height: 25px;
-    /* border-radius: 10px 0px 0px 10px; */
-    background-color: rgb(17, 19, 20);
-    border: 1px solid rgb(41, 41, 41);
-
-    button{
-        cursor: pointer;
-        border: none;
-        margin-top: -1px;
-        width: 70px;
-        height: 28px;
-        margin-inline: 0px;
-        background-color: rgba(128, 128, 128, 0);
-        font-family: system-ui;
-        font-size: 15px;
-        color: rgb(169, 169, 169);
-        &:hover{
-            background-color: rgb(115, 8, 255);
-        }
-    }
-}
-.menu{
-    position: absolute;
-    bottom: 25px;
-    right: 0px;
-    width: 30px;
-    height: 30px;
-    /*border-radius: 10px 0px 0px 10px;*/
-    background-color: rgb(17, 17, 17);
-    border: 1px solid rgb(41, 41, 41);
-}
-.add_title{
-    position: fixed;
-    margin-top: -25px;
-    margin-left: 15px;
-    font-family: monospace;
-    color: white;
-    font-size: 19px;
-}
-.props_tit{
-    position: fixed;
-    color: rgb(253 253 253);
-    font-family: monospace;
-    font-size: 19px;
-    margin-top: -24px;
-}
-.properties{
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 300px;
-    height: 92vh;
-    padding-right: 16px;
-    background-color: rgb(20, 20, 20);
-    padding-left: 15px;
+    width: 20px;
+    height: 20px;
+    z-index: 25;
+    border: 2px solid black;
     display: none;
-    overflow-y: scroll;
-    border-top: 30px solid rgb(115, 8, 255);
-    h1{
-        font-size: 19px;
-        color: white;
-        font-family: $Theme_font;
+    &:hover {
+      transition: 1s;
+      background-color: black;
     }
-    button{
-        color: white;
-        height: 35px;
-        background-color: $Theme_color;
-        border: none;
-        margin-top: 3px;
-        margin-left: 5px;
-        border-radius: 4px;
-        cursor: pointer;
-        &:hover{
-            background-color: rgb(41, 41, 41);
-        }
-    }
-    input{
-        background-color: rgb(34, 34, 34);
-        border: 1px solid rgb(53, 53, 53);
-        border-radius: 4px;
-        color: white;
-        padding-left: 25px;
-        height: 30px;
-        font-family: $Theme_font;
-        font-size: 18px;
-        width: 89%;
-        margin-top: 3px;
-        &:hover{
-            border-color: rgb(115, 8, 255);
-        }
-        &:focus{
-            outline: 1px solid rgb(82, 82, 82);
-            color: white;
-        
-        }
-        &[type="color"] {
-            background-color: rgba(43, 43, 43, 0);
-            padding-left: 0px;
-            width: 95%;
-            height: 50px;
-            border: none;
-            outline: none;
-            border-radius: 4px;
-        }
-    }
-    .margin_padding div{
-        display: flex;
-    }
-    .margin_padding div input{
-        width: 70%;
-    }
-    .scale{
-        display: flex;
-    }
-    .scale input{
-        width: 40%;
-    }
-    .scale #height{
-        margin-left: 10px;
-    }
-    .dimension{
-        display: flex;
-        input{
-            width: 40%;
-            
-            
-        }
-        #left{
-            margin-left: 10px;
-        }
-    }
-    
-    .scroll_max{
-        margin-top: 45px;
-    }
-    .color_selector{
-        display: flex;
-    
-        input[type = "color"]{
-            margin-top: 0px;
-            height: 45px;
-            width: 50%;
-            margin-right: 24px;
-            margin-left: 5px;
-        }
-    }
+  }
 }
 
-.addmenu{
+.selectedobj {
+  &::after {
+    content: "";
     position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 328px;
-    height: 100vh;
-    background-color: rgb(20, 20, 20);
-    border-top: 30px solid rgb(115, 8, 255);
-    overflow-y: scroll;
-    display: none;
-
-    button{
-        color: white;
-        width: 95%;
-        text-align: start;
-        height: 40px;
-        background-color: transparent;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        border: none;
-        margin-top: 5px;
-        margin-left: 8px;
-        font-size: 18px;
-        border: 1px solid rgb(51, 51, 51);
-        span{
-            position: absolute;
-            background: #212121;
-            border: 1px solid #313131;
-            /* width: 90px; */
-            padding-inline: 10px;
-            margin-top: -2px;
-            border-radius: 4px;
-            height: 25px;
-            margin-left: -2px;
-            align-self: end;
-            justify-content: end;
-            font-size: 16px;
-            right: 10px;
-        }
-        &:hover{
-            background-color: rgb(31, 31, 31);
-        }
-    }
-}
-
-.projects{
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgb(15, 15, 15);
-    z-index: 9;
-    transition: 2s ease-out;
-    .horizontal_sep{
-        width: 98%;
-        margin-left: 1%;
-        margin-top: 5px;
-        height: 2px;
-        background-color: rgb(115, 8, 255);
-    }
-}
-
-
-.project_navs{
-    display: flex;
-    h1{
-        color: rgb(255, 255, 255);
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 24px;
-        margin-left: 28px;
-        width: 250px;
-    }
-    input{
-        height: 31px;
-        margin-top: 15px;
-        margin-left: 46%;
-        padding-left: 5px;
-        background-color: $Theme_color;
-        border: 1px solid rgb(75, 75, 75);
-        border-radius: 4px;
-        color: rgb(115, 8, 255);
-        &:hover{
-            background-color: rgb(41, 41, 41);
-        }
-        &:focus{
-            outline: 1px solid rgb(148, 66, 255);
-        }
-    }
-
-    button{
-        margin-top: 15px;
-        margin-left: 5px;
-        border-radius: 4px;
-        height: 36px;
-        background-color: $Theme_color;
-        border: none;
-        color: rgb(115, 8, 255);
-        width: 100px;
-
-        &:hover{
-            background-color: rgb(63, 63, 63);
-        }
-    }
-    
-}
-.file_menus{
-    position: absolute;
-    height: 550px;
-    width: 300px;
-    left: 10px;
-    bottom: 35px;
-    background-color:rgb(15, 15, 15);
+    top: -25px;
+    left: -25px;
+    right: -25px;
+    bottom: -25px;
+    border: 2px dashed #d000d7;
     border-radius: 4px;
-    border: 1px solid rgb(73, 73, 73);
-    display: none;
-    flex-direction: column-reverse;
-    button{
-        text-align: start;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        border: none;
-        background-color: rgb(15, 15, 15);
-        color: white;
-        height: 40px;
-        &:hover{
-            background-color: rgb(31, 31, 31);
-        }
-        span{
-            position: absolute;
-            background: #212121;
-            border: 1px solid #313131;
-            /* width: 90px; */
-            padding-inline: 10px;
-            border-radius: 4px;
-            height: 20px;
-            margin-left: -2px;
-            align-self: end;
-            justify-content: end;
-            right: 10px;
-        }
-    }
+  }
 }
-.edit_menu{
-    position: absolute;
-    height: 550px;
-    width: 300px;
-    left: 80px;
-    bottom: 35px;
-    background-color:rgb(15, 15, 15);
-    border-radius: 4px;
-    border: 1px solid rgb(73, 73, 73);
-    display: none;
-    flex-direction: column-reverse;
-    button{
-        text-align: start;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        border: none;
-        background-color: rgb(15, 15, 15);
-        color: white;
-        height: 40px;
-        &:hover{
-            background-color: rgb(31, 31, 31);
-        }
-        span{
-            position: absolute;
-            background: #212121;
-            border: 1px solid #313131;
-            /* width: 90px; */
-            padding-inline: 10px;
-            border-radius: 4px;
-            height: 20px;
-            margin-left: -2px;
-            align-self: end;
-            justify-content: end;
-            right: 10px;
-        }
-    }
-}
-.view_menu{
-    position: absolute;
-    height: 550px;
-    width: 300px;
-    left: 150px;
-    bottom: 35px;
-    background-color:rgb(15, 15, 15);
-    border-radius: 4px;
-    border: 1px solid rgb(73, 73, 73);
-    display: none;
-    flex-direction: column-reverse;
-    button{
-        text-align: start;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        border: none;
-        background-color: rgb(15, 15, 15);
-        color: white;
-        height: 40px;
-        &:hover{
-            background-color: rgb(31, 31, 31);
-        }
-        span{
-            position: absolute;
-            background: #212121;
-            border: 1px solid #313131;
-            /* width: 90px; */
-            padding-inline: 10px;
-            border-radius: 4px;
-            height: 20px;
-            margin-left: -2px;
-            align-self: end;
-            justify-content: end;
-            right: 10px;
-        }
-    }
-}
-.window_menu{
-    position: absolute;
-    height: 400px;
-    width: 300px;
-    left: 210px;
-    bottom: 35px;
-    background-color:rgb(15, 15, 15);
-    border-radius: 4px;
-    border: 1px solid rgb(73, 73, 73);
-    display: none;
-    flex-direction: column-reverse;
-    button{
-        text-align: start;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        border: none;
-        background-color: rgb(15, 15, 15);
-        color: white;
-        height: 40px;
-        &:hover{
-            background-color: rgb(31, 31, 31);
-        }
-        span{
-            position: absolute;
-            background: #212121;
-            border: 1px solid #313131;
-            /* width: 90px; */
-            padding-inline: 10px;
-            border-radius: 4px;
-            height: 20px;
-            margin-left: -2px;
-            align-self: end;
-            justify-content: end;
-            right: 10px;
-        }
-    }
-}
-.help_menu{
-    position: absolute;
-    height: 300px;
-    width: 300px;
-    left: 280px;
-    bottom: 35px;
-    background-color:rgb(15, 15, 15);
-    border-radius: 4px;
-    border: 1px solid rgb(73, 73, 73);
-    display: none;
-    flex-direction: column-reverse;
-    button{
-        text-align: start;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        border: none;
-        background-color: rgb(15, 15, 15);
-        color: white;
-        height: 40px;
-        &:hover{
-            background-color: rgb(31, 31, 31);
-        }
-        span{
-            position: absolute;
-            background: #212121;
-            border: 1px solid #313131;
-            /* width: 90px; */
-            padding-inline: 10px;
-            border-radius: 4px;
-            height: 20px;
-            margin-left: -2px;
-            align-self: end;
-            justify-content: end;
-            right: 10px;
-        }
-    }
-}
-.projects_list{
-    overflow-y: scroll;
-    height: 87vh;
-    width: 99vw;
-    margin-top: 15px;
-    div:hover{
-        background-color: rgb(34, 34, 34);
-    }
-    div{
-        width: 95%;
-        height: 100px;
-        background-color: #161616;
-        margin-left: 2%;
-        margin-top: 10px;
-        cursor: pointer;
-        display: flex;
-        border: 1px solid rgb(60, 5, 133);
-        border-radius: 0px;
-    }
-    h1{
-        display: block;
-        margin-left: 80px;
-        margin-top: 0px;
-        height: 85px;
-        width: 150px;
-        text-align: center;
-        padding-top: 5vh;
-        font-family: Arial, Helvetica, sans-serif;
-        color: white;
-    }
-    h2{
-        margin-left: 350px;
-        margin-top: 40px;
-        color: white;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 18px;
-    
-    }
-    h3{
-        margin-left: 350px;
-        margin-top: 40px;
-        color: white;
-        font-family: Arial, Helvetica, sans-serif;
-    
-    }
-}
-.create_pr_prompt{
-    position: absolute !important;
+.rightclick {
+  position: absolute;
+  /*just if it dosent work unless this two are usless here*/
+  top: 0px;
+  left: 0px;
+  /* top and left */
+  width: 300px;
+  height: 0px;
+  background-color: black;
+  /* hidden by defult*/
+  display: none;
+  border-radius: 8px;
+  transition: 0.3s ease-out;
+  button {
     width: 100%;
-    height: 99.5%;
+    margin-top: 5px;
+    text-align: start;
+    border: none;
+    background-color: transparent;
+    color: white;
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+    height: 30px;
+    span {
+      position: absolute;
+      background: #212121;
+      border: 1px solid #313131;
+      /* width: 90px; */
+      padding-inline: 10px;
+      border-radius: 4px;
+      height: 20px;
+      margin-left: -2px;
+      align-self: end;
+      justify-content: end;
+      right: 10px;
+    }
+    &:hover {
+      background-color: rgb(31, 31, 31);
+    }
+  }
+}
+.bottom_nav {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 25px;
+  display: flex;
+  /* border-radius: 10px 0px 0px 10px; */
+  background-color: rgb(17, 19, 20);
+  border: 1px solid rgb(41, 41, 41);
+  z-index: 4;
+  button {
+    cursor: pointer;
+    border: none;
+    margin-top: -1px;
+    width: 70px;
+    height: 28px;
+    margin-inline: 0px;
+    background-color: rgba(128, 128, 128, 0);
+    font-family: system-ui;
+    font-size: 15px;
+    color: rgb(169, 169, 169);
+    &:hover {
+      background-color: rgb(115, 8, 255);
+    }
+  }
+}
+.menu {
+  position: absolute;
+  bottom: 25px;
+  right: 0px;
+  width: 30px;
+  height: 30px;
+  /*border-radius: 10px 0px 0px 10px;*/
+  background-color: rgb(17, 17, 17);
+  border: 1px solid rgb(41, 41, 41);
+}
+.add_title {
+  position: fixed;
+  margin-top: -25px;
+  margin-left: 15px;
+  font-family: monospace;
+  color: white;
+  font-size: 19px;
+}
+.props_tit {
+  position: fixed;
+  color: rgb(253 253 253);
+  font-family: monospace;
+  font-size: 19px;
+  margin-top: -24px;
+}
+.properties {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 300px;
+  height: 92vh;
+  padding-right: 16px;
+  background-color: rgb(20, 20, 20);
+  padding-left: 15px;
+  display: none;
+  overflow-y: scroll;
+  border-top: 30px solid rgb(115, 8, 255);
+  h1 {
+    font-size: 19px;
+    color: white;
+    font-family: $Theme_font;
+  }
+  button {
+    color: white;
+    height: 35px;
+    background-color: $Theme_color;
+    border: none;
+    margin-top: 3px;
+    margin-left: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(41, 41, 41);
+    }
+  }
+  input {
+    background-color: rgb(34, 34, 34);
+    border: 1px solid rgb(53, 53, 53);
+    border-radius: 4px;
+    color: white;
+    padding-left: 25px;
+    height: 30px;
+    font-family: $Theme_font;
+    font-size: 18px;
+    width: 89%;
+    margin-top: 3px;
+    &:hover {
+      border-color: rgb(115, 8, 255);
+    }
+    &:focus {
+      outline: 1px solid rgb(82, 82, 82);
+      color: white;
+    }
+    &[type="color"] {
+      background-color: rgba(43, 43, 43, 0);
+      padding-left: 0px;
+      width: 95%;
+      height: 50px;
+      border: none;
+      outline: none;
+      border-radius: 4px;
+    }
+  }
+  .margin_padding div {
+    display: flex;
+  }
+  .margin_padding div input {
+    width: 70%;
+  }
+  .scale {
+    display: flex;
+  }
+  .scale input {
+    width: 40%;
+  }
+  .scale #height {
+    margin-left: 10px;
+  }
+  .dimension {
+    display: flex;
+    input {
+      width: 40%;
+    }
+    #left {
+      margin-left: 10px;
+    }
+  }
+
+  .scroll_max {
+    margin-top: 45px;
+  }
+  .color_selector {
+    display: flex;
+
+    input[type="color"] {
+      margin-top: 0px;
+      height: 45px;
+      width: 50%;
+      margin-right: 24px;
+      margin-left: 5px;
+    }
+  }
+}
+
+.addmenu {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 328px;
+  height: 100vh;
+  background-color: rgb(20, 20, 20);
+  border-top: 30px solid rgb(115, 8, 255);
+  overflow-y: scroll;
+  display: none;
+
+  button {
+    color: white;
+    width: 95%;
+    text-align: start;
+    height: 40px;
+    background-color: transparent;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+    border: none;
+    margin-top: 5px;
+    margin-left: 8px;
+    font-size: 18px;
+    border: 1px solid rgb(51, 51, 51);
+    span {
+      position: absolute;
+      background: #212121;
+      border: 1px solid #313131;
+      /* width: 90px; */
+      padding-inline: 10px;
+      margin-top: -2px;
+      border-radius: 4px;
+      height: 25px;
+      margin-left: -2px;
+      align-self: end;
+      justify-content: end;
+      font-size: 16px;
+      right: 10px;
+    }
+    &:hover {
+      background-color: rgb(31, 31, 31);
+    }
+  }
+}
+
+.projects {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(15, 15, 15);
+  z-index: 9;
+  transition: 2s ease-out;
+  .horizontal_sep {
+    width: 98%;
+    margin-left: 1%;
+    margin-top: 5px;
+    height: 2px;
+    background-color: rgb(115, 8, 255);
+  }
+}
+
+.project_navs {
+  display: flex;
+  h1 {
+    color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    margin-left: 28px;
+    width: 250px;
+  }
+  input {
+    height: 31px;
+    margin-top: 15px;
+    margin-left: 46%;
+    padding-left: 5px;
+    background-color: $Theme_color;
+    border: 1px solid rgb(75, 75, 75);
+    border-radius: 4px;
+    color: rgb(115, 8, 255);
+    &:hover {
+      background-color: rgb(41, 41, 41);
+    }
+    &:focus {
+      outline: 1px solid rgb(148, 66, 255);
+    }
+  }
+
+  button {
+    margin-top: 15px;
+    margin-left: 5px;
+    border-radius: 4px;
+    height: 36px;
+    background-color: $Theme_color;
+    border: none;
+    color: rgb(115, 8, 255);
+    width: 100px;
+
+    &:hover {
+      background-color: rgb(63, 63, 63);
+    }
+  }
+}
+.file_menus {
+  position: absolute;
+  height: 550px;
+  width: 300px;
+  left: 10px;
+  bottom: 35px;
+  background-color: rgb(15, 15, 15);
+  border-radius: 4px;
+  border: 1px solid rgb(73, 73, 73);
+  display: none;
+  flex-direction: column-reverse;
+  button {
+    text-align: start;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+    border: none;
     background-color: rgb(15, 15, 15);
-    margin-top: -675px;
-    margin-left: 2px;
-    border-radius: 10px;
-    z-index: 10;
-    display: none;
-    /* transition: 2s ease-out; */
-    .project_folder{
-        button{
-            width: 100px;
-            height: 38px;
-            border-radius: 4px;
-            background-color: rgb(43, 43, 43);
-            color: rgb(115, 8, 255);
-            border: none;
-            &:hover{
-                background-color: rgb(63, 63, 63);
-            }
-        }
+    color: white;
+    height: 40px;
+    &:hover {
+      background-color: rgb(31, 31, 31);
     }
-    h1{
-        color: white;
-        margin-left: 40px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 40px;
+    span {
+      position: absolute;
+      background: #212121;
+      border: 1px solid #313131;
+      /* width: 90px; */
+      padding-inline: 10px;
+      border-radius: 4px;
+      height: 20px;
+      margin-left: -2px;
+      align-self: end;
+      justify-content: end;
+      right: 10px;
     }
-    .action_btns{
-        margin-top: 150px;
-        margin-left: 40px;
-        
-        button{
-            height: 35px;
-            width: 100px;
-            border: none;
-            background-color: rgb(46, 46, 46);
-            color: rgb(148, 66, 255);
-            border-radius: 4px;
-        }
-    }
+  }
 }
-
-.project_props{
-    color: rgb(100, 100, 100);
+.edit_menu {
+  position: absolute;
+  height: 550px;
+  width: 300px;
+  left: 80px;
+  bottom: 35px;
+  background-color: rgb(15, 15, 15);
+  border-radius: 4px;
+  border: 1px solid rgb(73, 73, 73);
+  display: none;
+  flex-direction: column-reverse;
+  button {
+    text-align: start;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+    border: none;
+    background-color: rgb(15, 15, 15);
+    color: white;
+    height: 40px;
+    &:hover {
+      background-color: rgb(31, 31, 31);
+    }
+    span {
+      position: absolute;
+      background: #212121;
+      border: 1px solid #313131;
+      /* width: 90px; */
+      padding-inline: 10px;
+      border-radius: 4px;
+      height: 20px;
+      margin-left: -2px;
+      align-self: end;
+      justify-content: end;
+      right: 10px;
+    }
+  }
+}
+.view_menu {
+  position: absolute;
+  height: 550px;
+  width: 300px;
+  left: 150px;
+  bottom: 35px;
+  background-color: rgb(15, 15, 15);
+  border-radius: 4px;
+  border: 1px solid rgb(73, 73, 73);
+  display: none;
+  flex-direction: column-reverse;
+  button {
+    text-align: start;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+    border: none;
+    background-color: rgb(15, 15, 15);
+    color: white;
+    height: 40px;
+    &:hover {
+      background-color: rgb(31, 31, 31);
+    }
+    span {
+      position: absolute;
+      background: #212121;
+      border: 1px solid #313131;
+      /* width: 90px; */
+      padding-inline: 10px;
+      border-radius: 4px;
+      height: 20px;
+      margin-left: -2px;
+      align-self: end;
+      justify-content: end;
+      right: 10px;
+    }
+  }
+}
+.window_menu {
+  position: absolute;
+  height: 400px;
+  width: 300px;
+  left: 210px;
+  bottom: 35px;
+  background-color: rgb(15, 15, 15);
+  border-radius: 4px;
+  border: 1px solid rgb(73, 73, 73);
+  display: none;
+  flex-direction: column-reverse;
+  button {
+    text-align: start;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+    border: none;
+    background-color: rgb(15, 15, 15);
+    color: white;
+    height: 40px;
+    &:hover {
+      background-color: rgb(31, 31, 31);
+    }
+    span {
+      position: absolute;
+      background: #212121;
+      border: 1px solid #313131;
+      /* width: 90px; */
+      padding-inline: 10px;
+      border-radius: 4px;
+      height: 20px;
+      margin-left: -2px;
+      align-self: end;
+      justify-content: end;
+      right: 10px;
+    }
+  }
+}
+.help_menu {
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  left: 280px;
+  bottom: 35px;
+  background-color: rgb(15, 15, 15);
+  border-radius: 4px;
+  border: 1px solid rgb(73, 73, 73);
+  display: none;
+  flex-direction: column-reverse;
+  button {
+    text-align: start;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+    border: none;
+    background-color: rgb(15, 15, 15);
+    color: white;
+    height: 40px;
+    &:hover {
+      background-color: rgb(31, 31, 31);
+    }
+    span {
+      position: absolute;
+      background: #212121;
+      border: 1px solid #313131;
+      /* width: 90px; */
+      padding-inline: 10px;
+      border-radius: 4px;
+      height: 20px;
+      margin-left: -2px;
+      align-self: end;
+      justify-content: end;
+      right: 10px;
+    }
+  }
+}
+.projects_list {
+  overflow-y: scroll;
+  height: 87vh;
+  width: 99vw;
+  margin-top: 15px;
+  div:hover {
+    background-color: rgb(34, 34, 34);
+  }
+  div {
+    width: 95%;
+    height: 100px;
+    background-color: #161616;
+    margin-left: 2%;
+    margin-top: 10px;
+    cursor: pointer;
+    display: flex;
+    border: 1px solid rgb(60, 5, 133);
+    border-radius: 0px;
+  }
+  h1 {
+    display: block;
+    margin-left: 80px;
+    margin-top: 0px;
+    height: 85px;
+    width: 150px;
+    text-align: center;
+    padding-top: 5vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+  }
+  h2 {
+    margin-left: 350px;
+    margin-top: 40px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+  }
+  h3 {
+    margin-left: 350px;
+    margin-top: 40px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+.create_pr_prompt {
+  position: absolute !important;
+  width: 100%;
+  height: 99.5%;
+  background-color: rgb(15, 15, 15);
+  margin-top: -675px;
+  margin-left: 2px;
+  border-radius: 10px;
+  z-index: 10;
+  display: none;
+  /* transition: 2s ease-out; */
+  .project_folder {
+    button {
+      width: 100px;
+      height: 38px;
+      border-radius: 4px;
+      background-color: rgb(43, 43, 43);
+      color: rgb(115, 8, 255);
+      border: none;
+      &:hover {
+        background-color: rgb(63, 63, 63);
+      }
+    }
+  }
+  h1 {
+    color: white;
     margin-left: 40px;
-    h2{
-        margin-top: 100px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 25px;
-    }
-    input{
-        width: 600px;
-        height: 35px;
-        background-color: rgb(34, 34, 34);
-        border: 1px solid rgb(53, 53, 53);
-        border-radius: 4px;
-        color: white;
-        padding-left: 25px;
-        transition: 1s;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+  }
+  .action_btns {
+    margin-top: 150px;
+    margin-left: 40px;
 
-        &:hover{
-            border-color: rgb(82, 82, 82);
-        }
+    button {
+      height: 35px;
+      width: 100px;
+      border: none;
+      background-color: rgb(46, 46, 46);
+      color: rgb(148, 66, 255);
+      border-radius: 4px;
     }
-    
+  }
 }
 
+.project_props {
+  color: rgb(100, 100, 100);
+  margin-left: 40px;
+  h2 {
+    margin-top: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+  }
+  input {
+    width: 600px;
+    height: 35px;
+    background-color: rgb(34, 34, 34);
+    border: 1px solid rgb(53, 53, 53);
+    border-radius: 4px;
+    color: white;
+    padding-left: 25px;
+    transition: 1s;
 
-
+    &:hover {
+      border-color: rgb(82, 82, 82);
+    }
+  }
+}
+.notification {
+  width: 500px;
+  height: 200px;
+  position: absolute;
+  bottom: -235px;
+  border-radius: 3px;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: rgb(15, 15, 15);
+  border: 1px solid rgb(34, 34, 34);
+  opacity: 0;
+  transition: 0.2s ease-out;
+  z-index: 3;
+  #ok_not {
+    height: 31px;
+    width: 91px;
+    background: #3f3f3f;
+    color: #ffffff;
+    border: 1px solid #575757;
+    border-radius: 4px;
+    margin-left: 3px;
+    margin-top: -51px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+  }
+  #cancel_not {
+    height: 31px;
+    width: 91px;
+    background: #3f3f3f;
+    color: rgb(255, 255, 255);
+    border: 1px solid #575757;
+    border-radius: 4px;
+    margin-left: 292px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+  }
+  .content {
+    height: 123px;
+    margin-top: 5px;
+    padding-left: 5%;
+    width: 95%;
+    background: transparent;
+    color: white;
+  }
+  .header {
+    height: 41px;
+    margin-top: -21px;
+    width: 100.3%;
+    margin-left: -1px;
+    background: #7c00fd;
+    font-size: 15px;
+    display: flex;
+    h1 {
+      margin-top: 10px;
+      margin-left: 18px;
+      color: white;
+      width: 401px;
+      text-wrap: nowrap;
+      font-size: 20px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    button {
+      margin-left: 50px;
+      height: 26px;
+      margin-top: 7px;
+      background: transparent;
+      border: none;
+      color: white;
+    }
+  }
+}
+.view_mode_t{
+  width: 83px;
+  height: 25px;
+  color: rgb(100, 100, 100);
+  font-size: 15px;
+  margin-top: 2px;
+  margin-left: 18px;
+  font-family: system-ui;
+}

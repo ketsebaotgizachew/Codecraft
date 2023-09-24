@@ -3,12 +3,14 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Kinder</title>
+        <title>Codecraft</title>
         <link rel="stylesheet" href="s.css" />
         <link rel="stylesheet" href="./js-window-css/jscode-window.css">
         <script src="./quadtree-js/quadtree.min.js"></script>
         <script type="text/javascript" src="eel.js"></script>
-
+        <script src="./highlight/highlight.min.js"></script>
+        <link rel="stylesheet" href="./highlight/styles/atom-one-dark.min.css">
+        <script src="./highlight/languages/javascript.min.js"></script>
     </head>
     <body>
         <!--Editor Body-->
@@ -48,13 +50,14 @@
 
         <!--js code editor window-->
         <div class="jscode_window" id="jscode_window">
-            <button onclick="window_manager.close_prompt('code')">close code editor</button>
-            <div class="lines_count">
-                <div class="number">
-                    <h1>1</h1>
-                </div>
+            <button onclick="window_manager.close_prompt('code')" class="c_code">close code editor</button>
+            <button class="e_code" onclick="main.excute_js()">Excute</button>
+            <div class="lines_count" id="lines_count">
+                
             </div>
             <div class="text_area" id="text_area">
+                <pre id="code" style="position: absolute;">
+                <code class="js"></code></pre>
                 <textarea type="text" id="code_area" placeholder="start typing here..." ></textarea>
                 <div class="highlight" id="highlight"></div>
             
@@ -67,6 +70,8 @@
             <button onclick="main.open_nav_menu('view')">View</button>
             <button onclick="main.open_nav_menu('window')">Window</button>
             <button onclick="main.open_nav_menu('help')">Help</button>
+            <h5 class="view_mode_t"> view mode</h5>
+            <input type="checkbox" id="view_mode">
         </div>
         <div class="file_menus" id="file_menus">
             <button>New Project <span>(Ctrl+N)</span></button>
@@ -80,8 +85,8 @@
             <button>Page Setup... <span></span></button>
             <button>Print... <span>(Ctrl+Shift+P)</span></button>
             <button>Exit <span>(Alt+F4)</span></button>
-            <button>Switch to Code View <span>(Ctrl+Shift+C)</span></button>
-            <button>Switch to Design View <span>(Ctrl+Shift+D)</span></button>
+            <button onclick="main.js_code()">Switch to Code View <span>(Ctrl+Shift+C)</span></button>
+            <button onclick="main.design_view()">Switch to Design View <span>(Ctrl+Shift+D)</span></button>
             <button>Preferences... <span>(Ctrl+,)</span></button>
         </div>
         <div class="edit_menu" id="edit_menu">
@@ -137,6 +142,17 @@
             <button>Check for Updates... <span></span></button>
             <button>About codecraft... <span></span></button>
             <button>Contact Support... <span></span></button>
+        </div>
+        <div class="notification" id="notification">
+            <div class="header">
+                <h1 id="not_title">A sample message</h1>
+                <button>close</button>
+            </div>
+            <div class="content" id="not_content">
+                <p>message content</p>
+            </div>
+            <button id="cancel_not">cancel</button>
+            <button id="ok_not">Ok</button>
         </div>
         <!--right click add button-->
         <div class="rightclick" id="rightclick">
