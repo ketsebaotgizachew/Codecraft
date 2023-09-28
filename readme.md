@@ -1,7 +1,13 @@
 # CodeCraft
 
 ## Overview
-![Screenshot 2023-09-21 123126](https://github.com/ketsebaotgizachew/Codecraft/assets/112580228/08a78b63-3254-42b9-b28f-b4e17837a6ec)
+
+website currently in progress inside codecraft
+
+https://github.com/ketsebaotgizachew/Codecraft/assets/112580228/45fa0c30-d4a7-41ca-9d15-5737d498e6af
+
+![Screenshot 2023-09-25 125700](https://github.com/ketsebaotgizachew/Codecraft/assets/112580228/9b211a0e-ccf5-4dcb-a07e-9e0f17767c39)
+
 
 The **codecraft** is an open-source drag-and-drop based Integrated Development Environment (IDE) designed for rapid creation of websites using HTML, CSS, and JavaScript. Unlike other competitors, **codecraft** prioritizes customizability without sacrificing the speed and convenience of drag-and-drop functionality.
 
