@@ -123,6 +123,13 @@ body {
   background-color: rgb(17, 17, 17);
   border: 1px solid rgb(41, 41, 41);
 }
+.menu svg {
+  padding-top: 2px;
+  padding-left: 3px;
+  width: 25px;
+  height: 25px;
+  fill: white;
+}
 
 .add_title {
   position: fixed;
@@ -154,10 +161,92 @@ body {
   overflow-y: scroll;
   border-top: 30px solid rgb(115, 8, 255);
 }
-.properties h1 {
+.properties .background_color {
+  border: 1px solid #3b3b3b;
+  padding-inline: 9px;
+  background-color: #0c0c0c;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-bottom: 9px;
+  border-radius: 10px;
+}
+.properties .background_color .pc.pcr-app.visible {
+  background: #222222;
+  width: 247px;
+  padding: 10px;
+  border-radius: 8px;
+}
+.properties .background_color .pc.pcr-app.visible .pcr-result {
+  background: #222222;
+}
+.properties .background_color .pc.pcr-app.visible .pcr-result:active {
+  outline: none;
+}
+.properties .background_color .pc.pcr-app.visible input[type=button] {
+  background-color: #0c0c0c;
+  width: 50px;
+}
+.properties .background_color .picker {
+  border: 1px solid #3b3b3b;
+  padding: 9px;
+  background-color: #0c0c0c;
+  margin-top: 10px;
+  border-radius: 10px;
+  display: flex;
+}
+.properties .background_color .picker canvas {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 8px;
+}
+.properties .background_color .color_pik {
+  border: 1px solid #3b3b3b;
+  padding: 9px;
+  background-color: #0c0c0c;
+  margin-top: -4px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  display: flex;
+}
+.properties .background_color .color_pik button {
+  width: 50px;
+}
+.properties .background_color .color_pik button:hover svg {
+  fill: #7c00fd;
+}
+.properties .background_color .color_pik button svg {
+  width: 25px;
+  height: 25px;
+  fill: white;
+}
+.properties .sc_dm {
+  border: 1px solid #3b3b3b;
+  padding-inline: 9px;
+  background-color: #0c0c0c;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-bottom: 9px;
+  border-radius: 10px;
+}
+.properties .sc_dm button {
+  margin-top: -7px;
+}
+.properties .sc_dm input {
+  margin-top: 10px;
+}
+.properties .sc_dm h1 {
   font-size: 19px;
+  margin-top: 6px;
   color: white;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.properties h1 {
+  font-size: 19px;
+  margin-top: 2px;
+  color: white;
+  font-family: system-ui;
+  margin-bottom: 7px;
 }
 .properties button {
   color: white;
@@ -205,12 +294,14 @@ body {
 }
 .properties .margin_padding div input {
   width: 70%;
+  margin-top: -5px;
 }
 .properties .scale {
   display: flex;
 }
 .properties .scale input {
   width: 40%;
+  margin-top: -2px;
 }
 .properties .scale #height {
   margin-left: 10px;
@@ -348,6 +439,7 @@ body {
   border: 1px solid rgb(73, 73, 73);
   display: none;
   flex-direction: column-reverse;
+  z-index: 15;
 }
 .file_menus button {
   text-align: start;
@@ -384,6 +476,7 @@ body {
   border-radius: 4px;
   border: 1px solid rgb(73, 73, 73);
   display: none;
+  z-index: 18;
   flex-direction: column-reverse;
 }
 .edit_menu button {
@@ -415,6 +508,7 @@ body {
   position: absolute;
   height: 550px;
   width: 300px;
+  z-index: 18;
   left: 150px;
   bottom: 35px;
   background-color: rgb(15, 15, 15);
@@ -456,6 +550,7 @@ body {
   bottom: 35px;
   background-color: rgb(15, 15, 15);
   border-radius: 4px;
+  z-index: 18;
   border: 1px solid rgb(73, 73, 73);
   display: none;
   flex-direction: column-reverse;
@@ -491,6 +586,7 @@ body {
   width: 300px;
   left: 280px;
   bottom: 35px;
+  z-index: 18;
   background-color: rgb(15, 15, 15);
   border-radius: 4px;
   border: 1px solid rgb(73, 73, 73);

@@ -29,12 +29,11 @@ function add_bottom_right_handle(selected_object){
     selected_object.appendChild(bottom_right_grab)
     bottom_right_grab.style.position = "absolute"
     //bottom_right_grab.style.marginTop = selected_object.getBoundingClientRect().height + 20 + "px"
-    bottom_right_grab.style.marginTop = " -40px"
+    bottom_right_grab.style.marginTop = "-"+(selected_object.getBoundingClientRect().height - 200) + "px"
 
-    bottom_right_grab.style.marginLeft = selected_object.getBoundingClientRect().width + - 30  + "px";
-    bottom_right_grab.style.width = 20 + "px"
-    bottom_right_grab.style.height = 20 + "px"
-    bottom_right_grab.style.background = "transparent"
+    bottom_right_grab.style.marginLeft = selected_object.getBoundingClientRect().width + - 0  + "px";
+    bottom_right_grab.style.width = 100 + "vw"
+    bottom_right_grab.style.height = 2 + "px"
     bottom_right_grab.style.background = "#d000d7"
     bottom_right_grab.style.borderRadius = "4px"
     bottom_right_grab.classList.add("bottom_right_grab")

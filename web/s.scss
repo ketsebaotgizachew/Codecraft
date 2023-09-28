@@ -128,6 +128,13 @@ body {
   /*border-radius: 10px 0px 0px 10px;*/
   background-color: rgb(17, 17, 17);
   border: 1px solid rgb(41, 41, 41);
+  svg {
+    padding-top: 2px;
+    padding-left: 3px;
+    width: 25px;
+    height: 25px;
+    fill: white;
+  }
 }
 .add_title {
   position: fixed;
@@ -144,6 +151,7 @@ body {
   font-size: 19px;
   margin-top: -24px;
 }
+
 .properties {
   position: absolute;
   top: 0px;
@@ -156,10 +164,97 @@ body {
   display: none;
   overflow-y: scroll;
   border-top: 30px solid rgb(115, 8, 255);
+  
+  .background_color {
+    border: 1px solid #3b3b3b;
+    padding-inline: 9px;
+    background-color: #0c0c0c;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-bottom: 9px;
+    border-radius: 10px;
+    .pc.pcr-app.visible {
+      background: #222222;
+      width: 247px;
+      padding: 10px;
+      border-radius: 8px;
+      .pcr-result {
+        background: #222222;
+        &:active{
+          outline: none;
+        }
+      }
+      input[type = "button"]{
+        background-color: #0c0c0c;
+        width: 50px;
+      }
+    }
+    .picker {
+      border: 1px solid #3b3b3b;
+      padding: 9px;
+      background-color: #0c0c0c;
+      margin-top: 10px;
+      border-radius: 10px;
+      display: flex;
+      
+      canvas {
+        width: 100%;
+        height: 100%;
+        background: white;
+        border-radius: 8px;
+      }
+    }
+    .color_pik {
+      border: 1px solid #3b3b3b;
+      padding: 9px;
+      background-color: #0c0c0c;
+      margin-top: -4px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      display: flex;
+
+      button {
+        width: 50px;
+        &:hover {
+          svg {
+            fill: #7c00fd;
+          }
+        }
+        svg {
+          width: 25px;
+          height: 25px;
+          fill: white;
+        }
+      }
+    }
+  }
+  .sc_dm {
+    border: 1px solid #3b3b3b;
+    padding-inline: 9px;
+    background-color: #0c0c0c;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-bottom: 9px;
+    border-radius: 10px;
+    button {
+      margin-top: -7px;
+    }
+    input {
+      margin-top: 10px;
+    }
+    h1{
+      font-size: 19px;
+      margin-top: 6px;
+      color: white;
+      font-family: $Theme_font;
+    }
+  }
   h1 {
     font-size: 19px;
+    margin-top: 2px;
     color: white;
-    font-family: $Theme_font;
+    font-family: system-ui;
+    margin-bottom: 7px;
   }
   button {
     color: white;
@@ -207,12 +302,15 @@ body {
   }
   .margin_padding div input {
     width: 70%;
+    margin-top: -5px;
   }
+
   .scale {
     display: flex;
   }
   .scale input {
     width: 40%;
+    margin-top: -2px;
   }
   .scale #height {
     margin-left: 10px;
@@ -357,6 +455,7 @@ body {
   border: 1px solid rgb(73, 73, 73);
   display: none;
   flex-direction: column-reverse;
+  z-index: 15;
   button {
     text-align: start;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -394,6 +493,7 @@ body {
   border-radius: 4px;
   border: 1px solid rgb(73, 73, 73);
   display: none;
+  z-index: 18;
   flex-direction: column-reverse;
   button {
     text-align: start;
@@ -426,6 +526,8 @@ body {
   position: absolute;
   height: 550px;
   width: 300px;
+  z-index: 18;
+
   left: 150px;
   bottom: 35px;
   background-color: rgb(15, 15, 15);
@@ -468,6 +570,8 @@ body {
   bottom: 35px;
   background-color: rgb(15, 15, 15);
   border-radius: 4px;
+  z-index: 18;
+
   border: 1px solid rgb(73, 73, 73);
   display: none;
   flex-direction: column-reverse;
@@ -504,6 +608,8 @@ body {
   width: 300px;
   left: 280px;
   bottom: 35px;
+  z-index: 18;
+
   background-color: rgb(15, 15, 15);
   border-radius: 4px;
   border: 1px solid rgb(73, 73, 73);
@@ -719,7 +825,7 @@ body {
     }
   }
 }
-.view_mode_t{
+.view_mode_t {
   width: 83px;
   height: 25px;
   color: rgb(100, 100, 100);

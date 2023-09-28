@@ -78,7 +78,7 @@
   margin-top: 35px;
   margin-left: 5px;
   width: 70px;
-  height: 90vh;
+  height: 65vh;
   background-color: rgb(12, 12, 12);
   border: 1px solid rgb(41, 41, 41);
 }
@@ -103,7 +103,7 @@
 .jscode_window .text_area {
   overflow-y: scroll;
   width: 90vw;
-  height: 90vh;
+  height: 65vh;
   margin-left: 80px;
   margin-top: 35px;
   background-color: transparent;
@@ -112,7 +112,7 @@
 .jscode_window .text_area pre {
   position: absolute;
   width: 98%;
-  height: 90vh;
+  height: 65vh;
   z-index: 5;
   background-color: transparent;
   border: none;
@@ -126,7 +126,7 @@
   width: 90vw;
   margin-top: -29px;
   font-size: 18px;
-  height: 90vh;
+  height: 65vh;
 }
 .jscode_window .text_area pre code span {
   font-size: 19px !important; /* Adjust as needed */
@@ -140,7 +140,7 @@
 .jscode_window .text_area textarea {
   position: absolute;
   width: 90vw;
-  height: 89vh;
+  height: 65vh;
   z-index: 5;
   padding-left: 15px;
   background-color: transparent;
@@ -175,4 +175,26 @@
   /* Other properties for better alignment */
   padding-left: 15px !important;
   box-sizing: border-box !important;
+}
+
+.field {
+  position: absolute;
+  top: 71vh;
+  width: 535px;
+  height: 167px;
+  z-index: 1;
+  background: rgb(32, 32, 32);
+  border: 1px solid #434343;
+  border-radius: 5px;
+  left: 5px;
+}
+.field button {
+  position: absolute;
+  width: 535px;
+  height: 37px;
+  z-index: 8;
+  color: white;
+  background: #000235;
+  border: 1px solid #434343;
+  border-radius: 5px;
 }/*# sourceMappingURL=jscode-window.css.map */

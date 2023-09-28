@@ -1,3 +1,5 @@
+import { initsuggestions } from "./autosuggest.js";
+
 let code_area = document.getElementById("code_area")
 let highlight = document.getElementById("highlight")
 let line_display = document.getElementById("lines_count")
@@ -72,7 +74,7 @@ function findClosestNumber(numbers, target) {
         return (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev);
     });
 }
-
+initsuggestions(code_area)
 let highlighted_code = document.getElementById("code")
 let codetag = highlighted_code.querySelector("code")
 code_area.addEventListener("mousedown", input_cliked)

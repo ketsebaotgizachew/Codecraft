@@ -11,6 +11,9 @@
         <script src="./highlight/highlight.min.js"></script>
         <link rel="stylesheet" href="./highlight/styles/atom-one-dark.min.css">
         <script src="./highlight/languages/javascript.min.js"></script>
+        <script type="module" src="./jscoder/js-input-handler.js"></script>
+        <link rel="stylesheet" href="./pickr/dist/themes/nano.min.css">
+        <script src="./pickr/dist/pickr.min.js"></script>
     </head>
     <body>
         <!--Editor Body-->
@@ -50,6 +53,8 @@
 
         <!--js code editor window-->
         <div class="jscode_window" id="jscode_window">
+            <div class="field" id="sug">
+            </div>
             <button onclick="window_manager.close_prompt('code')" class="c_code">close code editor</button>
             <button class="e_code" onclick="main.excute_js()">Excute</button>
             <div class="lines_count" id="lines_count">
@@ -169,7 +174,9 @@
             <button>Lock/Unlock Element <span>(Ctrl+L)</span></button>
         </div>
         <!--Add Menu For the addable elements-->
-        <div class="menu" id="menu"></div>
+        <div class="menu" id="menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
+        </div>
 
         <!--properties prompt-->
         <div class="properties" id="props">
@@ -178,38 +185,49 @@
             <input type="text" id="ID_inducator" onchange="main.change('id')" placeholder="Not-Set"/>
 
             <h1>position</h1>
-            <input type="text" id="position" placeholder="default-absolute">
+            <input type="text" id="position" placeholder="absolute" onchange="main.change('position')">
             
             <h1>display</h1>
-            <input type="text" placeholder="default-block" id="display">
+            <input type="text" placeholder="block" id="display" onchange="main.change('display')">
 
-            <h1>Background-color</h1>
-            <input type="color" id="background_color" oninput="main.change('background_color')" />
-
-            <h1>scale</h1>
-            <div class="scale">
-                <input type="text" placeholder="width" id="width" onchange="main.change('width')"/>
-                <input type="text" placeholder="height" id="height" onchange="main.change('height')"/>
-            </div>
-            <div class="dimension">
-                <input type="text" placeholder="top" id="top" onchange="main.change('top')"/>
-                <input type="text" placeholder="left" id="left" onchange="main.change('left')"/>
-            </div>
-
-            <div class="margin_padding">
-                <h1>margin</h1>
-                <div class="margin_holder">
-                    <input type="text" placeholder="margin" id="margin_all" onchange="main.change('margin_all')"/>
-                    <button>custom</button>
+            <div class="background_color">
+                <h1>Background-color</h1>
+                <div class="color_pik">
+                    <input type="text" id="background_color" placeholder="#ddd989" oninput="main.change('background_color')">
+                    <button>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 0c17.7 0 32 14.3 32 32V42.4c93.7 13.9 167.7 88 181.6 181.6H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H469.6c-13.9 93.7-88 167.7-181.6 181.6V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V469.6C130.3 455.7 56.3 381.7 42.4 288H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H42.4C56.3 130.3 130.3 56.3 224 42.4V32c0-17.7 14.3-32 32-32zM107.4 288c12.5 58.3 58.4 104.1 116.6 116.6V384c0-17.7 14.3-32 32-32s32 14.3 32 32v20.6c58.3-12.5 104.1-58.4 116.6-116.6H384c-17.7 0-32-14.3-32-32s14.3-32 32-32h20.6C392.1 165.7 346.3 119.9 288 107.4V128c0 17.7-14.3 32-32 32s-32-14.3-32-32V107.4C165.7 119.9 119.9 165.7 107.4 224H128c17.7 0 32 14.3 32 32s-14.3 32-32 32H107.4zM256 224a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>
+                    </button>
                 </div>
-
-                <h1>padding</h1>
-                <div class="padding_holder">
-                    <input type="text" placeholder="padding" id="padding_all" onchange="main.change('padding_all')">
-                    <button>custom</button>
+                <div class="picker" id="pick">
+                    
                 </div>
-
             </div>
+            <div class="sc_dm">
+                <h1>scale</h1>
+                <div class="scale">
+                    <input type="text" placeholder="width" id="width" onchange="main.change('width')"/>
+                    <input type="text" placeholder="height" id="height" onchange="main.change('height')"/>
+                </div>
+                <div class="dimension">
+                    <input type="text" placeholder="top" id="top" onchange="main.change('top')"/>
+                    <input type="text" placeholder="left" id="left" onchange="main.change('left')"/>
+                </div>
+                <div class="margin_padding">
+                    <h1>margin</h1>
+                    <div class="margin_holder">
+                        <input type="text" placeholder="margin" id="margin_all" onchange="main.change('margin_all')"/>
+                        <button>custom</button>
+                    </div>
+    
+                    <h1>padding</h1>
+                    <div class="padding_holder">
+                        <input type="text" placeholder="padding" id="padding_all" onchange="main.change('padding_all')">
+                        <button>custom</button>
+                    </div>
+    
+                </div>
+            </div>
+            
 
             <!--text only properties-->
             <div class="text_only">
@@ -229,25 +247,25 @@
             <!--image properties only-->
             <div class="img_props">
                 <h1>Image Properties</h1>
-                <input type="text" placeholder="img-url" id="img_url" onchange="change('img_url')">
+                <input type="text" placeholder="img-url" id="img_url" onfocus="main.change('img_url')">
                 <input type="text" placeholder="image-repeat" id="image_repeat">
                 <input type="text" placeholder="img-size">
             </div>
 
             <div class="others">
                 <h1>others</h1>
-                <input type="text" placeholder="border" id="border" onchange="change('border')">
-                <input type="text" placeholder="border-radius" id="border_radius"     onchange="change('border_radius')">
-                <input type="text" placeholder="backdrop" id="backdrop"   onchange="change('backdrop')">
-                <input type="text" placeholder="opacity" id="opacity"   onchange="change('opacity')">
-                <input type="text" placeholder="visiblity" id="visiblity" onchange="change('visiblity')">
-                <input type="text" placeholder="box-shadow" id="box_shadow" onchange="change('box-shadow')">
-                <input type="text" placeholder="z-index" id="Z_index" onchange="change('z-index')">
-                <input type="text" placeholder="overflow-x" id="overflow_x" onchange="change('overflowx')">
-                <input type="text" placeholder="overflow-y" id="overflow_y" onchange="change('overflowy')">
-                <input type="text" placeholder="justify-content" id="justify_content"   onchange="change('justify-content')">
-                <input type="text" placeholder="align-self" id="align_self"    onchange="change('align-self')">
-                <input type="text" placeholder="align-content" id="align_content" onchange="change('align-content')">
+                <input type="text" placeholder="border" id="border" onchange="main.change('border')">
+                <input type="text" placeholder="border-radius" id="border_radius"     onchange="main.change('border_radius')">
+                <input type="text" placeholder="backdrop" id="backdrop"   onchange="main.change('backdrop')">
+                <input type="text" placeholder="opacity" id="opacity"   onchange="main.change('opacity')">
+                <input type="text" placeholder="visiblity" id="visiblity" onchange="main.change('visiblity')">
+                <input type="text" placeholder="box-shadow" id="box_shadow" onchange="main.change('box-shadow')">
+                <input type="text" placeholder="z-index" id="Z_index" onchange="main.change('z-index')">
+                <input type="text" placeholder="overflow-x" id="overflow_x" onchange="main.change('overflowx')">
+                <input type="text" placeholder="overflow-y" id="overflow_y" onchange="main.change('overflowy')">
+                <input type="text" placeholder="justify-content" id="justify_content"   onchange="main.change('justify-content')">
+                <input type="text" placeholder="align-self" id="align_self"    onchange="main.change('align-self')">
+                <input type="text" placeholder="align-content" id="align_content" onchange="main.change('align-content')">
             </div>
 
             <!--to keep the last property elements from cliping when the scroll ends-->
